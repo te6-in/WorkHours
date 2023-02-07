@@ -1,6 +1,6 @@
 import * as ICAL from "ical.js";
 
-class Event {
+export class Event {
 	readonly durationMilliseconds: number;
 
 	constructor(
@@ -17,7 +17,7 @@ class Event {
 	}
 }
 
-class Events {
+export class Events {
 	durationMilliseconds: number;
 
 	constructor(readonly summary: string, readonly events: Event[]) {
@@ -80,6 +80,14 @@ export function getCalendar(icalData: string) {
 
 	calendar.forEach((events) => {
 		events.setDurationMilliseconds();
+	});
+
+	calendar.sort((a, b) => {
+		if (a.durationMilliseconds === b.durationMilliseconds) {
+			return a.summary.localeCompare(b.summary);
+		} else {
+			return b.durationMilliseconds - a.durationMilliseconds;
+		}
 	});
 
 	return calendar;

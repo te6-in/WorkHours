@@ -1,3 +1,4 @@
+import { EventsCard } from "@/components/EventsCard";
 import { getCalendar } from "@/scripts/calendar";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -34,15 +35,22 @@ function App() {
 	}, [icalData]);
 
 	return (
-		<div>
+		<>
 			<header>
 				<h1>일한시간</h1>
 			</header>
 			<main>
 				<input type="file" onChange={onFileChange} />
+				{icalData ? (
+					<ul>
+						{getCalendar(icalData).map((events, index) => (
+							<EventsCard events={events} key={index} />
+						))}
+					</ul>
+				) : null}
 			</main>
 			<footer>Footer</footer>
-		</div>
+		</>
 	);
 }
 
