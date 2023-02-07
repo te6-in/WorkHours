@@ -6,13 +6,13 @@ export class Event {
 	constructor(
 		readonly start: Date,
 		readonly end: Date,
-		readonly recurRules: any, // TODO
+		readonly recurRules: any, // TODO: type
 		readonly excludedDates: Date[] | null
 	) {
 		if (recurRules === null) {
 			this.durationMilliseconds = this.end.getTime() - this.start.getTime();
 		} else {
-			this.durationMilliseconds = 0; // TODO
+			this.durationMilliseconds = 0; // TODO: calculate duration
 		}
 	}
 }

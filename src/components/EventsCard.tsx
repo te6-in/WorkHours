@@ -28,7 +28,6 @@ export function EventsCard({ events }: { events: Events }) {
 		}
 	});
 
-	// sort by count and then duration
 	countsByDuration.sort((a, b) => {
 		if (a.count === b.count) {
 			return b.duration - a.duration;
@@ -38,7 +37,7 @@ export function EventsCard({ events }: { events: Events }) {
 	});
 
 	return (
-		<li>
+		<li className="m-auto max-w-xl bg-white p-4">
 			{events.summary} (
 			{getHumanStringFromMilliseconds(events.durationMilliseconds)})<br />
 			<ul>

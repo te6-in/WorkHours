@@ -1,4 +1,6 @@
 import { EventsCard } from "@/components/EventsCard";
+import { Footer } from "@/components/Footer";
+import { Info } from "@/components/Info";
 import { getCalendar } from "@/scripts/calendar";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -35,22 +37,23 @@ function App() {
 	}, [icalData]);
 
 	return (
-		<>
-			<header>
-				<h1>일한시간</h1>
-			</header>
-			<main>
-				<input type="file" onChange={onFileChange} />
-				{icalData ? (
-					<ul>
-						{getCalendar(icalData).map((events, index) => (
-							<EventsCard events={events} key={index} />
-						))}
-					</ul>
-				) : null}
+		<div className="flex min-h-screen flex-col justify-between">
+			<main className="p-6">
+				<section>
+					<Info onFileChange={onFileChange} />
+				</section>
+				<section>
+					{icalData ? (
+						<ul className="mt-12">
+							{getCalendar(icalData).map((events, index) => (
+								<EventsCard events={events} key={index} />
+							))}
+						</ul>
+					) : null}
+				</section>
 			</main>
-			<footer>Footer</footer>
-		</>
+			<Footer />
+		</div>
 	);
 }
 

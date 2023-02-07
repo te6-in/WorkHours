@@ -9,7 +9,10 @@ export function DurationItem({
 }) {
 	return (
 		<li>
-			{getHumanStringFromMilliseconds(duration)} x {count}회
+			<label className="block p-2">
+				<input type="checkbox" className="mr-2" />
+				{getHumanStringFromMilliseconds(duration)} x {count}회
+			</label>
 		</li>
 	);
 }
