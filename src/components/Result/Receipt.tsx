@@ -2,7 +2,7 @@ import { Result } from "@/scripts/counts-by-durations";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
 import { forwardRef } from "react";
 
-interface StatisticsProps {
+interface ReceiptProps {
 	results: Result[];
 }
 
@@ -11,7 +11,7 @@ type Receipt = {
 	total: number;
 }[];
 
-export const Statistics = forwardRef<HTMLDivElement, StatisticsProps>(
+export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 	(props, ref) => {
 		const { results } = props;
 		const totalSelectedDuration = results.reduce(

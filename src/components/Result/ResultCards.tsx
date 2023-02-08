@@ -1,7 +1,7 @@
 import { Note } from "@/components/Note";
 import { EventsCard } from "@/components/Result/EventsCard";
+import { Receipt } from "@/components/Result/Receipt";
 import { ScrollToResultButton } from "@/components/Result/ScrollToResultButton";
-import { Statistics } from "@/components/Result/Statistics";
 import { Calendar } from "@/scripts/calendar";
 import { getResults, Result } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
@@ -29,7 +29,7 @@ export function ResultCards({
 	setData,
 }: ResultProps) {
 	const [results, setResults] = useState<Result[] | null>(null);
-	const statisticsRef = useRef<HTMLDivElement>(null);
+	const receiptRef = useRef<HTMLDivElement>(null);
 
 	const firstNoneAvailableResultIndex = results
 		? results.findIndex((result) =>
@@ -73,7 +73,7 @@ export function ResultCards({
 
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
-			<ScrollToResultButton to={statisticsRef} />
+			<ScrollToResultButton to={receiptRef} />
 			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
 				{results &&
 					(firstNoneAvailableResultIndex === -1 || !hideNoneAvailables) &&
@@ -101,7 +101,7 @@ export function ResultCards({
 					</>
 				)}
 			</ul>
-			{results && <Statistics results={results} ref={statisticsRef} />}
+			{results && <Receipt results={results} ref={receiptRef} />}
 			<input
 				type="file"
 				id="new-file"
