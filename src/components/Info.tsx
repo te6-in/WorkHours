@@ -71,7 +71,7 @@ export function Info({ setICalData, uploaded }: InfoProps) {
 						일정 별로 사용한 시간과 시급을 계산해줍니다.
 					</Description>
 					<Note
-						text="업로드한 파일은 어디에도 저장되지 않습니다."
+						text="업로드한 파일은 브라우저에서만 처리되며 어디에도 저장되지 않습니다."
 						moreClasses="mt-2"
 					/>
 					<input

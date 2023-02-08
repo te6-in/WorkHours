@@ -100,14 +100,19 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 		(countByDuration) => countByDuration.checked === true
 	);
 
+	const noneAvailable = result.countsByDurations.every(
+		(countByDuration) => countByDuration.duration === 0
+	);
+
 	return (
 		<li
 			className={`card rounded-xl p-4 shadow-md ${
 				hasChecked ? "bg-slate-300" : "bg-slate-400"
-			}`}
+			}
+			${noneAvailable ? "opacity-50" : ""}`}
 		>
 			<div className="mb-3 ml-1 flex flex-wrap items-center justify-between text-lg font-semibold text-slate-900">
-				{result.summary}
+				<div className="mr-4">{result.summary}</div>
 				<div className="ml-auto text-right text-base font-medium text-slate-600">
 					{`${
 						selectedTotalCount === 0
@@ -130,10 +135,12 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 					/>
 				))}
 			</ul>
-			<div className="flex justify-end gap-1">
-				<Button text="모두 선택" onClick={onSelectAllClick} />
-				<Button text="모두 선택 해제" onClick={onSelectNoneClick} />
-			</div>
+			{!noneAvailable && (
+				<div className="flex justify-end gap-1">
+					<Button text="모두 선택" onClick={onSelectAllClick} />
+					<Button text="모두 선택 해제" onClick={onSelectNoneClick} />
+				</div>
+			)}
 		</li>
 	);
 }

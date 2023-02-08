@@ -42,7 +42,7 @@ export function DropZone({ setICalData, uploaded, children }: DropZoneProps) {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.15 }}
-						className="fixed top-0 left-0 flex h-screen w-screen flex-col items-center justify-center gap-6 bg-slate-200 bg-opacity-40 text-slate-900 backdrop-blur-md"
+						className="fixed top-0 left-0 z-20 flex h-screen w-screen flex-col items-center justify-center gap-6 bg-slate-200 bg-opacity-40 text-slate-900 backdrop-blur-md"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

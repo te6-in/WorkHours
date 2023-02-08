@@ -15,7 +15,18 @@ interface ResultProps {
 
 export function ResultCards({ calendar, setData }: ResultProps) {
 	const [results, setResults] = useState<Result[] | null>(null);
+	const [hideNoneAvailables, setHideNotAvailables] = useState(true);
 	const statisticsRef = useRef<HTMLDivElement>(null);
+
+	const firstNoneAvailableResultIndex = results
+		? results.findIndex((result) =>
+				result.countsByDurations.every(
+					(countByDuration) => countByDuration.duration === 0
+				)
+		  )
+		: -1;
+
+	console.log(firstNoneAvailableResultIndex);
 
 	useEffect(() => {
 		if (calendar) {
@@ -43,6 +54,10 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 		}
 	};
 
+	const onShowButtonClick = () => {
+		setHideNotAvailables(false);
+	};
+
 	// TODO: add event search
 
 	return (
@@ -50,9 +65,30 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 			<ScrollToResultButton to={statisticsRef} />
 			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
 				{results &&
+					(firstNoneAvailableResultIndex === -1 || !hideNoneAvailables) &&
 					results.map((result, index) => (
 						<EventsCard result={result} setResults={setResults} key={index} />
 					))}
+				{results && firstNoneAvailableResultIndex !== -1 && hideNoneAvailables && (
+					<>
+						{results
+							.slice(0, firstNoneAvailableResultIndex)
+							.map((result, index) => (
+								<EventsCard
+									result={result}
+									setResults={setResults}
+									key={index}
+								/>
+							))}
+						<button
+							onClick={onShowButtonClick}
+							className="mx-auto my-2 w-fit font-medium text-slate-300 underline underline-offset-2"
+						>
+							기간 없는 항목 {results.length - firstNoneAvailableResultIndex}개
+							표시
+						</button>
+					</>
+				)}
 			</ul>
 			<Statistics ref={statisticsRef} />
 			<input

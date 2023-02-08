@@ -40,7 +40,7 @@ export function ScrollToResultButton({
 					animate={{ x: "-50%", y: 0 }}
 					exit={{ x: "-50%", y: 80 }}
 					onClick={onClick}
-					className="fixed bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-slate-700 p-4 text-slate-50 shadow-md"
+					className="fixed bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-slate-700 p-4 text-slate-50 shadow-md"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

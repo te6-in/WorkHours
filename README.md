@@ -22,3 +22,4 @@ npm install
 - [ical.js.d.ts](https://github.com/etesync/ios/blob/master/src/types/ical.js.d.ts)
 - [react-dropzone](https://github.com/react-dropzone/react-dropzone)
 - [Lucide](https://lucide.dev/)
+- [framer-motion](https://www.framer.com/motion/)
