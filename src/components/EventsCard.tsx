@@ -96,7 +96,7 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 				{result.summary}
 				<div className="ml-auto text-right text-base font-medium text-slate-600">
 					{`${
-						selectedTotalDuration === 0
+						selectedTotalCount === 0
 							? "선택된 항목 없음"
 							: `${getHumanStringFromMilliseconds(
 									selectedTotalDuration

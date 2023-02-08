@@ -67,6 +67,12 @@ export function Footer() {
 					GitHub 레포지토리
 				</Button>
 			</div>
+			<Link href="https://github.com/te6-in/WorkHours/">
+				<img
+					alt="GitHub 레포지토리 Stars 수"
+					src="https://img.shields.io/github/stars/te6-in/WorkHours?style=social"
+				/>
+			</Link>
 			<span className="text-center text-sm leading-6 text-slate-500">
 				라이선스:{" "}
 				<License
