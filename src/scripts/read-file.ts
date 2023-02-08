@@ -9,3 +9,5 @@ export function readFile(file: File, setData: (data: string) => void) {
 
 	reader.readAsText(file);
 }
+
+// TODO: handle error

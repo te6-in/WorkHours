@@ -84,7 +84,8 @@ export function Footer() {
 				<License
 					href="https://github.com/react-dropzone/react-dropzone"
 					text="react-dropzone"
-				></License>
+				></License>{" "}
+				| <License href="https://lucide.dev" text="Lucide"></License>
 			</span>
 		</footer>
 	);

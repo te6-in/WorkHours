@@ -1,58 +1,37 @@
 import { DurationChip } from "@/components/DurationChip";
-import { Events } from "@/scripts/calendar";
+import { Result } from "@/scripts/counts-by-durations";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
 
-interface CountByDuration {
-	duration: number;
-	count: number;
-}
-
-export function EventsCard({ events }: { events: Events }) {
-	const countsByDuration: CountByDuration[] = [];
-
-	events.events.forEach((event) => {
-		let isExist = false;
-
-		countsByDuration.forEach((countByDuration) => {
-			if (countByDuration.duration === event.durationMilliseconds) {
-				countByDuration.count += 1;
-				isExist = true;
-			}
-		});
-
-		if (!isExist) {
-			countsByDuration.push({
-				duration: event.durationMilliseconds,
-				count: 1,
-			});
-		}
-	});
-
-	countsByDuration.sort((a, b) => {
-		if (a.count === b.count) {
-			return b.duration - a.duration;
-		} else {
-			return b.count - a.count;
-		}
-	});
+export function EventsCard({ result }: { result: Result }) {
+	const totalCount = result.countsByDurations.reduce(
+		(total, countByDuration) => total + countByDuration.count,
+		0
+	);
+	const totalDuration = result.countsByDurations.reduce(
+		(total, countByDuration) => total + countByDuration.duration,
+		0
+	);
 
 	return (
 		<li className="rounded-xl bg-slate-400 p-4 shadow-md">
 			<div className="mb-3 ml-[0.125rem] flex flex-wrap items-center justify-between text-lg font-semibold text-slate-900">
-				<label>
-					<input type="checkbox" className="mr-2 accent-slate-800" />
-					{events.summary}
+				<label className="cursor-pointer">
+					<input
+						type="checkbox"
+						className="mr-2 cursor-pointer accent-slate-800"
+					/>
+					{result.summary}
 				</label>
 				<div className="ml-auto text-right text-base font-medium text-slate-600">
-					{`${getHumanStringFromMilliseconds(events.durationMilliseconds)}(${
-						events.events.length
-					}회) / ${getHumanStringFromMilliseconds(
-						events.durationMilliseconds
-					)}(${events.events.length}회)`}
+					{`${getHumanStringFromMilliseconds(
+						totalDuration
+					)}(${totalCount}회) / ${getHumanStringFromMilliseconds(
+						totalDuration
+					)}(${totalCount}회)`}
 				</div>
 			</div>
 			<ul className="flex flex-wrap gap-2">
-				{countsByDuration.map((countByDuration, index) => (
+				{result.countsByDurations.map((countByDuration, index) => (
 					<DurationChip
 						key={index}
 						duration={countByDuration.duration}

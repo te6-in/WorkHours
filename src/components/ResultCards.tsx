@@ -1,16 +1,33 @@
 import { EventsCard } from "@/components/EventsCard";
 import { Note } from "@/components/Note";
 import { Statistics } from "@/components/Statistics";
-import { getCalendar } from "@/scripts/calendar";
+import { Calendar } from "@/scripts/calendar";
+import { getResults, Result } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
-import { ChangeEvent } from "react";
+import { scrollToTop } from "@/scripts/scroll-to-top";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface ResultProps {
-	icalData: string;
+	calendar: Calendar;
 	setData: (data: string) => void;
 }
 
-export function Result({ icalData, setData }: ResultProps) {
+export function ResultCards({ calendar, setData }: ResultProps) {
+	const [results, setResults] = useState<Result[] | null>(null);
+
+	useEffect(() => {
+		if (calendar) {
+			setResults(getResults(calendar));
+		}
+	}, [calendar]);
+
+	// TODO: erase this
+	useEffect(() => {
+		if (results) {
+			console.log(results);
+		}
+	}, [results]);
+
 	const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const {
 			target: { files },
@@ -20,17 +37,19 @@ export function Result({ icalData, setData }: ResultProps) {
 
 		if (file) {
 			readFile(file, setData);
+			scrollToTop(100);
 		}
 	};
 
-	// TODO: add search
+	// TODO: add event search
 
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
 			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
-				{getCalendar(icalData).map((events, index) => (
-					<EventsCard events={events} key={index} />
-				))}
+				{results &&
+					results.map((result, index) => (
+						<EventsCard result={result} key={index} />
+					))}
 			</ul>
 			<Statistics />
 			<input

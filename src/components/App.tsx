@@ -1,27 +1,28 @@
 import { DropZone } from "@/components/DropZone";
 import { Footer } from "@/components/Footer";
 import { Info } from "@/components/Info";
-import { Result } from "@/components/Result";
-import { getCalendar } from "@/scripts/calendar";
+import { ResultCards } from "@/components/ResultCards";
+import { Calendar, getCalendar } from "@/scripts/calendar";
 import { useEffect, useState } from "react";
 
 function App() {
-	const [icalData, setCalendarData] = useState<string | null>(null);
+	const [icalData, setICalData] = useState<string | null>(null);
+	const [calendar, setCalendar] = useState<Calendar | null>(null);
 
 	useEffect(() => {
 		if (icalData) {
-			console.log(getCalendar(icalData));
+			setCalendar(getCalendar(icalData));
 		}
 	}, [icalData]);
 
 	return (
-		<DropZone setData={setCalendarData} hasFile={!!icalData}>
+		<DropZone setICalData={setICalData} uploaded={!!icalData}>
 			<main className="px-6 pt-12">
 				<section>
-					<Info setData={setCalendarData} uploaded={!!icalData} />
+					<Info setICalData={setICalData} uploaded={!!icalData} />
 				</section>
 				{/* TODO: add an example */}
-				{icalData && <Result icalData={icalData} setData={setCalendarData} />}
+				{calendar && <ResultCards calendar={calendar} setData={setICalData} />}
 			</main>
 			<Footer />
 		</DropZone>

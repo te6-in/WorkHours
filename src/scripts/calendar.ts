@@ -32,6 +32,8 @@ export class Events {
 	}
 }
 
+export type Calendar = Events[];
+
 function getDate(data: ICAL.Time) {
 	return new Date(
 		data.year,
@@ -44,7 +46,7 @@ function getDate(data: ICAL.Time) {
 }
 
 export function getCalendar(icalData: string) {
-	const calendar: Events[] = [];
+	const calendar: Calendar = [];
 
 	const jcalData = ICAL.parse(icalData);
 	const componentData = new ICAL.Component(jcalData);

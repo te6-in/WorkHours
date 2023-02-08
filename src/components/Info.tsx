@@ -1,9 +1,10 @@
 import { Note } from "@/components/Note";
 import { readFile } from "@/scripts/read-file";
+import { scrollToTop } from "@/scripts/scroll-to-top";
 import { ChangeEvent, ReactNode } from "react";
 
 interface InfoProps {
-	setData: (data: string) => void;
+	setICalData: (data: string) => void;
 	uploaded: boolean;
 }
 
@@ -15,7 +16,7 @@ function Description({ children }: { children: ReactNode }) {
 	);
 }
 
-export function Info({ setData, uploaded }: InfoProps) {
+export function Info({ setICalData, uploaded }: InfoProps) {
 	const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const {
 			target: { files },
@@ -24,7 +25,8 @@ export function Info({ setData, uploaded }: InfoProps) {
 		const file = files ? files[0] : null;
 
 		if (file) {
-			readFile(file, setData);
+			readFile(file, setICalData);
+			scrollToTop(100);
 		}
 	};
 
