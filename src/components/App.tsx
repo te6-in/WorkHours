@@ -45,10 +45,10 @@ function App() {
 	);
 }
 
-// TODO: add a scroll to bottom button
 // TODO: add how to get ics file
 // TODO: add an english version
 // TODO: add microinteractions
+// TODO: add filters
 // TODO: accessibility
 // TODO: SEO and analytics
 

@@ -1,4 +1,5 @@
 import { Result } from "@/scripts/counts-by-durations";
+import { getReceipt } from "@/scripts/receipt";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
 import { forwardRef } from "react";
 
@@ -6,55 +7,9 @@ interface ReceiptProps {
 	results: Result[];
 }
 
-type Receipt = {
-	summary: string;
-	total: number;
-}[];
-
 export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
-	(props, ref) => {
-		const { results } = props;
-		const totalSelectedDuration = results.reduce(
-			(total, result) =>
-				total +
-				result.countsByDurations.reduce(
-					(total, countByDuration) =>
-						total +
-						(countByDuration.checked
-							? countByDuration.count * countByDuration.duration
-							: 0),
-					0
-				),
-			0
-		);
-
-		const receipt: Receipt = [];
-
-		results.forEach((result) => {
-			const total = result.countsByDurations.reduce(
-				(total, countByDuration) =>
-					total +
-					(countByDuration.checked
-						? countByDuration.count * countByDuration.duration
-						: 0),
-				0
-			);
-
-			if (total > 0) {
-				receipt.push({
-					summary: result.summary,
-					total,
-				});
-			}
-		});
-
-		receipt.sort((a, b) => {
-			if (a.total === b.total) {
-				return a.summary.localeCompare(b.summary);
-			} else {
-				return b.total - a.total;
-			}
-		});
+	({ results }, ref) => {
+		const { receipt, totalSelectedDuration } = getReceipt(results);
 
 		return (
 			<div
