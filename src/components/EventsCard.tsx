@@ -1,4 +1,4 @@
-import { DurationItem } from "@/components/DurationItem";
+import { DurationChip } from "@/components/DurationChip";
 import { Events } from "@/scripts/calendar";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
 
@@ -37,21 +37,23 @@ export function EventsCard({ events }: { events: Events }) {
 	});
 
 	return (
-		<li className="rounded-xl bg-slate-400 p-4 shadow-sm shadow-slate-900">
-			<div className="mb-3 ml-[0.125rem] flex flex-wrap justify-between text-lg font-semibold text-slate-900">
+		<li className="rounded-xl bg-slate-400 p-4 shadow-md">
+			<div className="mb-3 ml-[0.125rem] flex flex-wrap items-center justify-between text-lg font-semibold text-slate-900">
 				<label>
-					<input type="checkbox" className="mr-2" />
+					<input type="checkbox" className="mr-2 accent-slate-800" />
 					{events.summary}
 				</label>
-				<div className="ml-auto text-base font-medium text-slate-600">
-					{`${getHumanStringFromMilliseconds(
+				<div className="ml-auto text-right text-base font-medium text-slate-600">
+					{`${getHumanStringFromMilliseconds(events.durationMilliseconds)}(${
+						events.events.length
+					}회) / ${getHumanStringFromMilliseconds(
 						events.durationMilliseconds
-					)} 선택됨`}
+					)}(${events.events.length}회)`}
 				</div>
 			</div>
 			<ul className="flex flex-wrap gap-2">
 				{countsByDuration.map((countByDuration, index) => (
-					<DurationItem
+					<DurationChip
 						key={index}
 						duration={countByDuration.duration}
 						count={countByDuration.count}

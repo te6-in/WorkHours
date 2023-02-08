@@ -40,7 +40,7 @@ function License({ href, text }: { href: string; text: string }) {
 
 export function Footer() {
 	return (
-		<footer className="mt-4 flex flex-col items-center gap-4 px-6 py-8">
+		<footer className="mt-8 flex flex-col items-center gap-4 px-6 py-8">
 			<div className="flex select-none flex-wrap items-center justify-center gap-2">
 				<Button href="https://blog.te6.in">
 					<img

@@ -1,7 +1,7 @@
 import { DropZone } from "@/components/DropZone";
-import { EventsCard } from "@/components/EventsCard";
 import { Footer } from "@/components/Footer";
 import { Info } from "@/components/Info";
+import { Result } from "@/components/Result";
 import { getCalendar } from "@/scripts/calendar";
 import { useEffect, useState } from "react";
 
@@ -16,23 +16,23 @@ function App() {
 
 	return (
 		<DropZone setData={setCalendarData} hasFile={!!icalData}>
-			<main className="px-6 py-12">
+			<main className="px-6 pt-12">
 				<section>
 					<Info setData={setCalendarData} uploaded={!!icalData} />
 				</section>
-				<section>
-					{icalData ? (
-						<ul className="m-auto mt-12 flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
-							{getCalendar(icalData).map((events, index) => (
-								<EventsCard events={events} key={index} />
-							))}
-						</ul>
-					) : null}
-				</section>
+				{/* TODO: add an example */}
+				{icalData && <Result icalData={icalData} setData={setCalendarData} />}
 			</main>
 			<Footer />
 		</DropZone>
 	);
 }
+
+// TODO: add a scroll to bottom button
+// TODO: add how to get ics file
+// TODO: add an english version
+// TODO: add microinteractions
+// TODO: accessibility
+// TODO: SEO and analytics
 
 export default App;

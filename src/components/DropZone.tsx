@@ -33,12 +33,14 @@ export function DropZone({ setData, hasFile, children }: DropZoneProps) {
 			<input {...getInputProps()} />
 			{children}
 			{isDragActive ? (
-				<div className="fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-slate-200 bg-opacity-40 backdrop-blur-md">
-					<p className="text-xl font-bold text-slate-900">
+				<div className="fixed top-0 left-0 flex h-screen w-screen flex-col items-center justify-center gap-4 bg-slate-200 bg-opacity-40 backdrop-blur-md">
+					{/* TODO: Add an icon (lucide is down rn) */}
+					<span>아이콘~</span>
+					<span className="text-xl font-bold text-slate-900">
 						{hasFile
 							? "새로운 파일을 업로드하려면 여기에 놓으세요."
 							: "여기에 *.ics 파일을 놓으세요."}
-					</p>
+					</span>
 				</div>
 			) : null}
 		</div>

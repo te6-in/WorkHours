@@ -1,3 +1,4 @@
+import { Note } from "@/components/Note";
 import { readFile } from "@/scripts/read-file";
 import { ChangeEvent, ReactNode } from "react";
 
@@ -8,7 +9,7 @@ interface InfoProps {
 
 function Description({ children }: { children: ReactNode }) {
 	return (
-		<p className="mt-8 text-center text-xl leading-8 text-slate-400">
+		<p className="mt-8 text-center text-xl leading-8 text-slate-300">
 			{children}
 		</p>
 	);
@@ -29,7 +30,10 @@ export function Info({ setData, uploaded }: InfoProps) {
 
 	return (
 		<>
-			<a href="/workhours/" className="flex items-center justify-center gap-2">
+			<a
+				href="/workhours/"
+				className="m-auto flex w-fit select-none items-center justify-center gap-2"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					role="img"
@@ -50,10 +54,13 @@ export function Info({ setData, uploaded }: InfoProps) {
 				<h1 className="mt-2 mr-2 text-5xl font-bold text-white">일한시간</h1>
 			</a>
 			{uploaded ? (
-				<Description>
-					필요한 내용을 선택하고
-					<br />맨 밑에서 결과를 확인해보세요.
-				</Description>
+				<>
+					<Description>
+						필요한 내용을 선택하고
+						<br />맨 밑에서 결과를 확인해보세요.
+					</Description>
+					<Note text="시간 및 횟수 순으로 정렬되었습니다." moreClasses="mt-2" />
+				</>
 			) : (
 				<>
 					<Description>
@@ -61,9 +68,10 @@ export function Info({ setData, uploaded }: InfoProps) {
 						<br />
 						일정 별로 사용한 시간과 시급을 계산해줍니다.
 					</Description>
-					<p className="mt-2 text-center text-sm font-medium text-slate-600">
-						업로드한 파일은 어디에도 저장되지 않습니다.
-					</p>
+					<Note
+						text="업로드한 파일은 어디에도 저장되지 않습니다."
+						moreClasses="mt-2"
+					/>
 					<input
 						type="file"
 						id="file"
@@ -79,10 +87,10 @@ export function Info({ setData, uploaded }: InfoProps) {
 							>
 								*.ics 파일 선택
 							</label>
-							<span className="text-sm text-slate-400">또는 끌어다 놓기</span>
+							<Note text="또는 끌어다 놓기" />
 						</div>
 						<button className="h-fit rounded-xl border-2 border-white py-3 px-5 text-lg text-white ">
-							캘린더 파일 받는 법
+							파일 받는 법
 						</button>
 					</div>
 				</>
