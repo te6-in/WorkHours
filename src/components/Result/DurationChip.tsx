@@ -36,14 +36,27 @@ export function DurationChip({
 		});
 	};
 
+	const isDisabled = countByDuration.duration === 0;
+
 	return (
 		<li>
-			<label className="chip flex cursor-pointer items-center rounded-lg bg-slate-100 px-3 py-2 text-slate-800 shadow-md">
+			<label
+				className={`chip flex items-center rounded-lg px-3 py-2 shadow-md ${
+					isDisabled ? "opacity-50" : "cursor-pointer"
+				} ${
+					countByDuration.checked
+						? "bg-slate-700 text-slate-50"
+						: "bg-slate-100 text-slate-800"
+				}`}
+			>
 				<input
 					type="checkbox"
 					checked={countByDuration.checked}
+					disabled={isDisabled}
 					onChange={onChange}
-					className="mr-2.5 cursor-pointer accent-slate-300"
+					className={`mr-2.5 accent-slate-300 ${
+						!isDisabled && "cursor-pointer"
+					}`}
 				/>
 				<span className="mt-[2px]">
 					{getHumanStringFromMilliseconds(countByDuration.duration)} *{" "}

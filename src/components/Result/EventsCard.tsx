@@ -60,10 +60,16 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 
 			newResults[resultIndex].countsByDurations = newResults[
 				resultIndex
-			].countsByDurations.map((item) => ({
-				...item,
-				checked: true,
-			}));
+			].countsByDurations.map((item) => {
+				if (item.duration !== 0) {
+					return {
+						...item,
+						checked: true,
+					};
+				} else {
+					return item;
+				}
+			});
 
 			return newResults;
 		});
@@ -90,8 +96,16 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 		});
 	};
 
+	const hasChecked = result.countsByDurations.some(
+		(countByDuration) => countByDuration.checked === true
+	);
+
 	return (
-		<li className="card rounded-xl bg-slate-400 p-4 shadow-md">
+		<li
+			className={`card rounded-xl p-4 shadow-md ${
+				hasChecked ? "bg-slate-300" : "bg-slate-400"
+			}`}
+		>
 			<div className="mb-3 ml-1 flex flex-wrap items-center justify-between text-lg font-semibold text-slate-900">
 				{result.summary}
 				<div className="ml-auto text-right text-base font-medium text-slate-600">
