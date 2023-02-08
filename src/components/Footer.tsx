@@ -68,8 +68,11 @@ export function Footer() {
 				</Button>
 			</div>
 			<span className="text-center text-sm leading-6 text-slate-500">
-				라이선스: <License href="" text="MPL-2.0"></License>
-				{/* TODO: add license url */}
+				라이선스:{" "}
+				<License
+					href="https://github.com/te6-in/WorkHours/blob/main/LICENSE"
+					text="MPL-2.0"
+				></License>
 				<br />
 				<License
 					href="https://github.com/kewisch/ical.js"
