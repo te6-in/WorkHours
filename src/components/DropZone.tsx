@@ -1,20 +1,26 @@
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode, useCallback } from "react";
+import { Dispatch, ReactNode, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface DropZoneProps {
 	setICalData: (data: string) => void;
+	setHideNoneAvailables: Dispatch<SetStateAction<boolean>>;
 	uploaded: boolean;
 	children: ReactNode;
 }
 
-export function DropZone({ setICalData, uploaded, children }: DropZoneProps) {
+export function DropZone({
+	setICalData,
+	setHideNoneAvailables,
+	uploaded,
+	children,
+}: DropZoneProps) {
 	const onDrop = useCallback((acceptedFiles: File[]) => {
 		acceptedFiles.forEach((file) => {
 			scrollToTop(100);
-			readFile(file, setICalData);
+			readFile(file, setICalData, setHideNoneAvailables);
 		});
 	}, []);
 

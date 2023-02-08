@@ -6,16 +6,29 @@ import { Calendar } from "@/scripts/calendar";
 import { getResults, Result } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import {
+	ChangeEvent,
+	Dispatch,
+	SetStateAction,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 
 interface ResultProps {
 	calendar: Calendar;
+	hideNoneAvailables: boolean;
+	setHideNoneAvailables: Dispatch<SetStateAction<boolean>>;
 	setData: (data: string) => void;
 }
 
-export function ResultCards({ calendar, setData }: ResultProps) {
+export function ResultCards({
+	calendar,
+	hideNoneAvailables,
+	setHideNoneAvailables,
+	setData,
+}: ResultProps) {
 	const [results, setResults] = useState<Result[] | null>(null);
-	const [hideNoneAvailables, setHideNotAvailables] = useState(true);
 	const statisticsRef = useRef<HTMLDivElement>(null);
 
 	const firstNoneAvailableResultIndex = results
@@ -47,13 +60,13 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 		const file = files ? files[0] : null;
 
 		if (file) {
-			readFile(file, setData);
+			readFile(file, setData, setHideNoneAvailables);
 			scrollToTop(100);
 		}
 	};
 
 	const onShowButtonClick = () => {
-		setHideNotAvailables(false);
+		setHideNoneAvailables(false);
 	};
 
 	// TODO: add event search
@@ -96,12 +109,12 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 				onChange={onFileChange}
 				className="hidden"
 			/>
-			<div className="flex select-none flex-col gap-1">
+			<div className="mt-6 flex select-none flex-col gap-1">
 				<label
 					htmlFor="new-file"
 					className="text-md cursor-pointer text-center font-medium text-slate-300 underline underline-offset-2"
 				>
-					다른 파일 선택
+					다른 파일로 결과 확인
 				</label>
 				<Note text="또는 끌어다 놓기" />
 			</div>

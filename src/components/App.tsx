@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 function App() {
 	const [icalData, setICalData] = useState<string | null>(null);
 	const [calendar, setCalendar] = useState<Calendar | null>(null);
+	const [hideNoneAvailables, setHideNotAvailables] = useState(true);
 
 	useEffect(() => {
 		if (icalData) {
@@ -16,13 +17,28 @@ function App() {
 	}, [icalData]);
 
 	return (
-		<DropZone setICalData={setICalData} uploaded={!!icalData}>
+		<DropZone
+			setICalData={setICalData}
+			setHideNoneAvailables={setHideNotAvailables}
+			uploaded={!!icalData}
+		>
 			<main className="px-6 pt-12">
 				<section>
-					<Info setICalData={setICalData} uploaded={!!icalData} />
+					<Info
+						setICalData={setICalData}
+						setHideNoneAvailables={setHideNotAvailables}
+						uploaded={!!icalData}
+					/>
 				</section>
 				{/* TODO: add an example */}
-				{calendar && <ResultCards calendar={calendar} setData={setICalData} />}
+				{calendar && (
+					<ResultCards
+						calendar={calendar}
+						hideNoneAvailables={hideNoneAvailables}
+						setHideNoneAvailables={setHideNotAvailables}
+						setData={setICalData}
+					/>
+				)}
 			</main>
 			<Footer />
 		</DropZone>
