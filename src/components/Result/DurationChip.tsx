@@ -45,8 +45,8 @@ export function DurationChip({
 					isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
 				} ${
 					countByDuration.checked
-						? "bg-slate-700 text-slate-50"
-						: "bg-slate-100 text-slate-800"
+						? "bg-zinc-700 text-zinc-50"
+						: "bg-zinc-100 text-zinc-800"
 				}`}
 			>
 				<input
@@ -54,7 +54,7 @@ export function DurationChip({
 					checked={countByDuration.checked}
 					disabled={isDisabled}
 					onChange={onChange}
-					className={`mr-2.5 accent-slate-300 ${
+					className={`mr-2.5 accent-zinc-300 ${
 						isDisabled ? "cursor-not-allowed" : "cursor-pointer"
 					}`}
 				/>

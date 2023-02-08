@@ -74,7 +74,7 @@ export function ResultCards({
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
 			<ScrollToResultButton to={receiptRef} />
-			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
+			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
 				{results &&
 					(firstNoneAvailableResultIndex === -1 || !hideNoneAvailables) &&
 					results.map((result, index) => (
@@ -93,7 +93,7 @@ export function ResultCards({
 							))}
 						<button
 							onClick={onShowButtonClick}
-							className="mx-auto my-2 w-fit font-medium text-slate-300 underline underline-offset-2"
+							className="mx-auto my-2 w-fit font-medium text-zinc-300 underline underline-offset-2"
 						>
 							기간 없는 항목 {results.length - firstNoneAvailableResultIndex}개
 							표시
@@ -112,7 +112,7 @@ export function ResultCards({
 			<div className="mt-6 flex select-none flex-col gap-1">
 				<label
 					htmlFor="new-file"
-					className="text-md cursor-pointer text-center font-medium text-slate-300 underline underline-offset-2"
+					className="text-md cursor-pointer text-center font-medium text-zinc-300 underline underline-offset-2"
 				>
 					다른 파일로 결과 확인
 				</label>

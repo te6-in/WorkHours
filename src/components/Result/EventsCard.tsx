@@ -19,7 +19,7 @@ function Button({ text, disabled, onClick }: ButtonProps) {
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`mt-3 rounded-lg bg-slate-500 px-3 py-2 text-sm font-medium text-slate-100 ${
+			className={`mt-3 rounded-lg bg-zinc-500 px-3 py-2 text-sm font-medium text-zinc-100 ${
 				disabled && "cursor-not-allowed opacity-50"
 			}`}
 		>
@@ -121,13 +121,13 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 	return (
 		<li
 			className={`card rounded-xl p-4 shadow-md ${
-				hasChecked ? "bg-slate-300" : "bg-slate-400"
+				hasChecked ? "bg-zinc-300" : "bg-zinc-400"
 			}
 			${noneAvailable ? "opacity-50" : ""}`}
 		>
-			<div className="mb-3 ml-1 flex flex-wrap items-center justify-between text-lg font-semibold text-slate-900">
+			<div className="mb-3 ml-1 flex flex-wrap items-center justify-between text-lg font-semibold text-zinc-900">
 				<div className="mr-4">{result.summary}</div>
-				<div className="ml-auto text-right text-base font-medium text-slate-600">
+				<div className="ml-auto text-right text-base font-medium text-zinc-600">
 					{`${
 						selectedTotalCount === 0
 							? "선택된 항목 없음"
