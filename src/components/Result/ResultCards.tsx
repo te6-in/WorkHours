@@ -88,7 +88,7 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 					</>
 				)}
 			</ul>
-			<Statistics ref={statisticsRef} />
+			{results && <Statistics results={results} ref={statisticsRef} />}
 			<input
 				type="file"
 				id="new-file"
