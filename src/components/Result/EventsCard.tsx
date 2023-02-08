@@ -10,14 +10,18 @@ interface EventsCardProps {
 
 interface ButtonProps {
 	text: string;
+	disabled: boolean;
 	onClick: () => void;
 }
 
-function Button({ text, onClick }: ButtonProps) {
+function Button({ text, disabled, onClick }: ButtonProps) {
 	return (
 		<button
 			onClick={onClick}
-			className="mt-3 rounded-lg bg-slate-500 px-3 py-2 text-sm font-medium text-slate-100"
+			disabled={disabled}
+			className={`mt-3 rounded-lg bg-slate-500 px-3 py-2 text-sm font-medium text-slate-100 ${
+				disabled && "cursor-not-allowed opacity-50"
+			}`}
 		>
 			{text}
 		</button>
@@ -104,6 +108,16 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 		(countByDuration) => countByDuration.duration === 0
 	);
 
+	const allChecked = result.countsByDurations.every(
+		(countByDuration) =>
+			countByDuration.checked === true ||
+			(countByDuration.checked === false && countByDuration.duration === 0)
+	);
+
+	const noneChecked = result.countsByDurations.every(
+		(countByDuration) => countByDuration.checked === false
+	);
+
 	return (
 		<li
 			className={`card rounded-xl p-4 shadow-md ${
@@ -137,8 +151,16 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 			</ul>
 			{!noneAvailable && (
 				<div className="flex justify-end gap-1">
-					<Button text="모두 선택" onClick={onSelectAllClick} />
-					<Button text="모두 선택 해제" onClick={onSelectNoneClick} />
+					<Button
+						text="모두 선택"
+						onClick={onSelectAllClick}
+						disabled={allChecked}
+					/>
+					<Button
+						text="모두 선택 해제"
+						onClick={onSelectNoneClick}
+						disabled={noneChecked}
+					/>
 				</div>
 			)}
 		</li>

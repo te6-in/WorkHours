@@ -42,7 +42,7 @@ export function DurationChip({
 		<li>
 			<label
 				className={`chip flex items-center rounded-lg px-3 py-2 shadow-md ${
-					isDisabled ? "opacity-50" : "cursor-pointer"
+					isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
 				} ${
 					countByDuration.checked
 						? "bg-slate-700 text-slate-50"
@@ -55,7 +55,7 @@ export function DurationChip({
 					disabled={isDisabled}
 					onChange={onChange}
 					className={`mr-2.5 accent-slate-300 ${
-						!isDisabled && "cursor-pointer"
+						isDisabled ? "cursor-not-allowed" : "cursor-pointer"
 					}`}
 				/>
 				<span className="mt-[2px]">

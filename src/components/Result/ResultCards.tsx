@@ -26,8 +26,6 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 		  )
 		: -1;
 
-	console.log(firstNoneAvailableResultIndex);
-
 	useEffect(() => {
 		if (calendar) {
 			setResults(getResults(calendar));
