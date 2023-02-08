@@ -133,10 +133,10 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 							? "선택된 항목 없음"
 							: `${getHumanStringFromMilliseconds(
 									selectedTotalDuration
-							  )} (${selectedTotalCount}회)`
+							  )} (${selectedTotalCount.toLocaleString()}회)`
 					} / ${getHumanStringFromMilliseconds(
 						totalDuration
-					)} (${totalCount}회)`}
+					)} (${totalCount.toLocaleString()}회)`}
 				</div>
 			</div>
 			<ul className="flex flex-wrap gap-2">

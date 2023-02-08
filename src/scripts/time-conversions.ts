@@ -22,7 +22,7 @@ export function getHumanString({
 		return "기간 없음";
 	}
 
-	const hoursString = hours === 0 ? "" : `${hours}시간`;
+	const hoursString = hours === 0 ? "" : `${hours.toLocaleString()}시간`;
 	// 1시간 3초 (x) 1시간 0분 3초 (o)
 	const minutesString = minutes === 0 && seconds === 0 ? "" : `${minutes}분`;
 	const secondsString = seconds === 0 ? "" : `${seconds}초`;

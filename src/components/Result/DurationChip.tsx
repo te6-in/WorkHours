@@ -60,7 +60,7 @@ export function DurationChip({
 				/>
 				<span className="mt-[2px]">
 					{getHumanStringFromMilliseconds(countByDuration.duration)} *{" "}
-					{countByDuration.count}회
+					{countByDuration.count.toLocaleString()}회
 				</span>
 			</label>
 		</li>
