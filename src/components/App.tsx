@@ -1,7 +1,7 @@
 import { DropZone } from "@/components/DropZone";
 import { Footer } from "@/components/Footer";
 import { Info } from "@/components/Info";
-import { ResultCards } from "@/components/ResultCards";
+import { ResultCards } from "@/components/Result/ResultCards";
 import { Calendar, getCalendar } from "@/scripts/calendar";
 import { useEffect, useState } from "react";
 

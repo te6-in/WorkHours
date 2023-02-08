@@ -1,5 +1,5 @@
 import { readFile } from "@/scripts/read-file";
-import { scrollToTop } from "@/scripts/scroll-to-top";
+import { scrollToTop } from "@/scripts/scroll";
 import { ReactNode, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 

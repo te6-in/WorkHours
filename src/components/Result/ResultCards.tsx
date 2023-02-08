@@ -1,11 +1,12 @@
-import { EventsCard } from "@/components/EventsCard";
 import { Note } from "@/components/Note";
-import { Statistics } from "@/components/Statistics";
+import { EventsCard } from "@/components/Result/EventsCard";
+import { ScrollToResultButton } from "@/components/Result/ScrollToResultButton";
+import { Statistics } from "@/components/Result/Statistics";
 import { Calendar } from "@/scripts/calendar";
 import { getResults, Result } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
-import { scrollToTop } from "@/scripts/scroll-to-top";
-import { ChangeEvent, useEffect, useState } from "react";
+import { scrollToTop } from "@/scripts/scroll";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 interface ResultProps {
 	calendar: Calendar;
@@ -14,6 +15,7 @@ interface ResultProps {
 
 export function ResultCards({ calendar, setData }: ResultProps) {
 	const [results, setResults] = useState<Result[] | null>(null);
+	const statisticsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (calendar) {
@@ -45,13 +47,14 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
+			<ScrollToResultButton to={statisticsRef} />
 			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
 				{results &&
 					results.map((result, index) => (
 						<EventsCard result={result} setResults={setResults} key={index} />
 					))}
 			</ul>
-			<Statistics />
+			<Statistics ref={statisticsRef} />
 			<input
 				type="file"
 				id="new-file"

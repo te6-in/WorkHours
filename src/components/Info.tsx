@@ -1,6 +1,6 @@
 import { Note } from "@/components/Note";
 import { readFile } from "@/scripts/read-file";
-import { scrollToTop } from "@/scripts/scroll-to-top";
+import { scrollToTop } from "@/scripts/scroll";
 import { ChangeEvent, ReactNode } from "react";
 
 interface InfoProps {

@@ -1,4 +1,4 @@
-import { DurationChip } from "@/components/DurationChip";
+import { DurationChip } from "@/components/Result/DurationChip";
 import { Result } from "@/scripts/counts-by-durations";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
 import { Dispatch, SetStateAction } from "react";
