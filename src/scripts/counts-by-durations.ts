@@ -3,7 +3,7 @@ import { Calendar, Events } from "@/scripts/calendar";
 export interface CountByDuration {
 	duration: number;
 	count: number;
-	selected: boolean;
+	checked: boolean;
 }
 
 export interface Result {
@@ -28,7 +28,7 @@ export function getCountsByDuration(events: Events): CountByDuration[] {
 			countsByDurations.push({
 				duration: event.durationMilliseconds,
 				count: 1,
-				selected: false,
+				checked: false,
 			});
 		}
 	});

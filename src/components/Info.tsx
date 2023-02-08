@@ -45,7 +45,7 @@ export function Info({ setICalData, uploaded }: InfoProps) {
 					strokeWidth="2"
 					strokeLinecap="round"
 					strokeLinejoin="round"
-					className="h-16 min-h-[4rem] w-16 min-w-[4rem] fill-none stroke-current text-white"
+					className="h-16 min-h-[4rem] w-16 min-w-[4rem] fill-none stroke-current text-slate-50"
 				>
 					<title>시계와 화살표가 결합된 아이콘</title>
 					<path d="M10 2h4"></path>
@@ -53,7 +53,7 @@ export function Info({ setICalData, uploaded }: InfoProps) {
 					<path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6"></path>
 					<path d="M9 17H4v5"></path>
 				</svg>
-				<h1 className="mt-2 mr-2 text-5xl font-bold text-white">일한시간</h1>
+				<h1 className="mt-2 mr-2 text-5xl font-bold text-slate-50">일한시간</h1>
 			</a>
 			{uploaded ? (
 				<>
@@ -85,13 +85,13 @@ export function Info({ setICalData, uploaded }: InfoProps) {
 						<div className="flex flex-col items-center gap-2">
 							<label
 								htmlFor="file"
-								className="cursor-pointer rounded-xl border-2 border-white bg-white py-3 px-5 text-center text-lg font-semibold text-slate-800"
+								className="cursor-pointer rounded-xl border-2 border-slate-50 bg-slate-50 py-3 px-5 text-center text-lg font-semibold text-slate-800"
 							>
 								*.ics 파일 선택
 							</label>
 							<Note text="또는 끌어다 놓기" />
 						</div>
-						<button className="h-fit rounded-xl border-2 border-white py-3 px-5 text-lg text-white ">
+						<button className="h-fit rounded-xl border-2 border-slate-50 py-3 px-5 text-lg text-slate-50 ">
 							파일 받는 법
 						</button>
 					</div>

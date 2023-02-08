@@ -48,7 +48,7 @@ export function ResultCards({ calendar, setData }: ResultProps) {
 			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
 				{results &&
 					results.map((result, index) => (
-						<EventsCard result={result} key={index} />
+						<EventsCard result={result} setResults={setResults} key={index} />
 					))}
 			</ul>
 			<Statistics />
