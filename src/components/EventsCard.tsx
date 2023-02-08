@@ -37,10 +37,19 @@ export function EventsCard({ events }: { events: Events }) {
 	});
 
 	return (
-		<li className="m-auto max-w-xl bg-white p-4">
-			{events.summary} (
-			{getHumanStringFromMilliseconds(events.durationMilliseconds)})<br />
-			<ul>
+		<li className="rounded-xl bg-slate-400 p-4 shadow-sm shadow-slate-900">
+			<div className="mb-3 ml-[0.125rem] flex flex-wrap justify-between text-lg font-semibold text-slate-900">
+				<label>
+					<input type="checkbox" className="mr-2" />
+					{events.summary}
+				</label>
+				<div className="ml-auto text-base font-medium text-slate-600">
+					{`${getHumanStringFromMilliseconds(
+						events.durationMilliseconds
+					)} 선택됨`}
+				</div>
+			</div>
+			<ul className="flex flex-wrap gap-2">
 				{countsByDuration.map((countByDuration, index) => (
 					<DurationItem
 						key={index}

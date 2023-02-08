@@ -1,34 +1,12 @@
+import { DropZone } from "@/components/DropZone";
 import { EventsCard } from "@/components/EventsCard";
 import { Footer } from "@/components/Footer";
 import { Info } from "@/components/Info";
 import { getCalendar } from "@/scripts/calendar";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 	const [icalData, setCalendarData] = useState<string | null>(null);
-
-	const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const {
-			target: { files },
-		} = event;
-
-		const file = files ? files[0] : null;
-
-		if (file) {
-			const reader = new FileReader();
-
-			reader.addEventListener("load", (readerEvent) => {
-				if (
-					readerEvent.target &&
-					typeof readerEvent.target.result === "string"
-				) {
-					setCalendarData(readerEvent.target.result);
-				}
-			});
-
-			reader.readAsText(file);
-		}
-	};
 
 	useEffect(() => {
 		if (icalData) {
@@ -37,14 +15,14 @@ function App() {
 	}, [icalData]);
 
 	return (
-		<div className="flex min-h-screen flex-col justify-between">
-			<main className="p-6">
+		<DropZone setData={setCalendarData} hasFile={!!icalData}>
+			<main className="px-6 py-12">
 				<section>
-					<Info onFileChange={onFileChange} />
+					<Info setData={setCalendarData} uploaded={!!icalData} />
 				</section>
 				<section>
 					{icalData ? (
-						<ul className="mt-12">
+						<ul className="m-auto mt-12 flex max-w-xl flex-col gap-4 rounded-2xl bg-slate-800 p-4">
 							{getCalendar(icalData).map((events, index) => (
 								<EventsCard events={events} key={index} />
 							))}
@@ -53,7 +31,7 @@ function App() {
 				</section>
 			</main>
 			<Footer />
-		</div>
+		</DropZone>
 	);
 }
 
