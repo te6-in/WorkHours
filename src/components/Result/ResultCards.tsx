@@ -74,34 +74,43 @@ export function ResultCards({
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
 			<ScrollToResultButton to={receiptRef} />
-			<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
-				{results &&
-					(firstNoneAvailableResultIndex === -1 || !hideNoneAvailables) &&
-					results.map((result, index) => (
-						<EventsCard result={result} setResults={setResults} key={index} />
-					))}
-				{results && firstNoneAvailableResultIndex !== -1 && hideNoneAvailables && (
-					<>
-						{results
-							.slice(0, firstNoneAvailableResultIndex)
-							.map((result, index) => (
-								<EventsCard
-									result={result}
-									setResults={setResults}
-									key={index}
-								/>
-							))}
-						<button
-							onClick={onShowButtonClick}
-							className="mx-auto my-2 w-fit font-medium text-zinc-300 underline underline-offset-2"
-						>
-							기간 없는 항목 {results.length - firstNoneAvailableResultIndex}개
-							표시
-						</button>
-					</>
-				)}
-			</ul>
-			{results && <Receipt results={results} ref={receiptRef} />}
+			{results && (
+				<>
+					{results.length > 0 && (
+						<ul className="flex max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
+							{(firstNoneAvailableResultIndex === -1 || !hideNoneAvailables) &&
+								results.map((result, index) => (
+									<EventsCard
+										result={result}
+										setResults={setResults}
+										key={index}
+									/>
+								))}
+							{firstNoneAvailableResultIndex !== -1 && hideNoneAvailables && (
+								<>
+									{results
+										.slice(0, firstNoneAvailableResultIndex)
+										.map((result, index) => (
+											<EventsCard
+												result={result}
+												setResults={setResults}
+												key={index}
+											/>
+										))}
+									<button
+										onClick={onShowButtonClick}
+										className="mx-auto my-2 w-fit font-medium text-zinc-300 underline underline-offset-2"
+									>
+										기간 없는 항목{" "}
+										{results.length - firstNoneAvailableResultIndex}개 표시
+									</button>
+								</>
+							)}
+						</ul>
+					)}
+					{<Receipt results={results} ref={receiptRef} />}
+				</>
+			)}
 			<input
 				type="file"
 				id="new-file"
