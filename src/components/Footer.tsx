@@ -1,5 +1,26 @@
 import { ReactNode } from "react";
 
+const data = [
+	{ name: "ical.js", url: "https://github.com/kewisch/ical.js" },
+	{
+		name: "ical.js.d.ts",
+		url: "https://github.com/etesync/ios/blob/master/src/types/ical.js.d.ts",
+	},
+	{
+		name: "ical-expander",
+		url: "https://github.com/mifi/ical-expander",
+	},
+	{
+		name: "react-dropzone",
+		url: "https://github.com/react-dropzone/react-dropzone",
+	},
+	{
+		name: "react-tailwindcss-datepicker",
+		url: "https://github.com/onesine/react-tailwindcss-datepicker",
+	},
+	{ name: "Lucide", url: "https://lucide.dev" },
+];
+
 interface LinkProps {
 	href: string;
 	className?: string;
@@ -32,7 +53,10 @@ function Button({ href, children }: { href: string; children: ReactNode }) {
 
 function License({ href, text }: { href: string; text: string }) {
 	return (
-		<Link href={href} className="text-zinc-300 underline underline-offset-2">
+		<Link
+			href={href}
+			className="inline-block text-zinc-300 underline underline-offset-2"
+		>
 			{text}
 		</Link>
 	);
@@ -78,23 +102,14 @@ export function Footer() {
 				<License
 					href="https://github.com/te6-in/WorkHours/blob/main/LICENSE"
 					text="MPL-2.0"
-				></License>
+				/>
 				<br />
-				<License
-					href="https://github.com/kewisch/ical.js"
-					text="ical.js"
-				></License>{" "}
-				|{" "}
-				<License
-					href="https://github.com/etesync/ios/blob/master/src/types/ical.js.d.ts"
-					text="ical.js.d.ts"
-				></License>{" "}
-				|{" "}
-				<License
-					href="https://github.com/react-dropzone/react-dropzone"
-					text="react-dropzone"
-				></License>{" "}
-				| <License href="https://lucide.dev" text="Lucide"></License>
+				{data.map((item, index) => (
+					<>
+						<License href={item.url} text={item.name} />
+						{index !== data.length - 1 && " | "}
+					</>
+				))}
 			</span>
 		</footer>
 	);

@@ -59,7 +59,7 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 							</ul>
 						</>
 					) : (
-						<div className="mb-0.5 text-center text-xl font-medium leading-relaxed text-zinc-500">
+						<div className="mb-0.5 text-center text-lg font-medium leading-relaxed text-zinc-500">
 							{results.length > 0 ? (
 								<>
 									선택된 항목이 없습니다.
