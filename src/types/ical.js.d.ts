@@ -136,7 +136,19 @@ declare module "ical.js" {
 	}
 
 	export class Duration {
+		public weeks: number;
 		public days: number;
+		public hours: number;
+		public minutes: number;
+		public seconds: number;
+	}
+
+	export class Period {
+		public start: Time;
+		public end: Time;
+
+		public constructor(data: { start: Time; end: Time });
+		public getDuration(): Duration;
 	}
 
 	export class RecurExpansion {

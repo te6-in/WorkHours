@@ -1,4 +1,4 @@
-import { Calendar, Events } from "@/scripts/calendar";
+import { Calendar, EventsBySummary } from "@/scripts/calendar";
 
 export interface CountByDuration {
 	duration: number;
@@ -11,7 +11,9 @@ export interface Result {
 	countsByDurations: CountByDuration[];
 }
 
-export function getCountsByDuration(events: Events): CountByDuration[] {
+export function getCountsByDuration(
+	events: EventsBySummary
+): CountByDuration[] {
 	const countsByDurations: CountByDuration[] = [];
 
 	events.events.forEach((event) => {

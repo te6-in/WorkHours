@@ -1,3 +1,17 @@
+import * as ICAL from "ical.js";
+
+export function icalDurationToMilliseconds(duration: ICAL.Duration) {
+	const { weeks, days, hours, minutes, seconds } = duration;
+
+	return (
+		seconds * 1000 +
+		minutes * 1000 * 60 +
+		hours * 1000 * 60 * 60 +
+		days * 1000 * 60 * 60 * 24 +
+		weeks * 1000 * 60 * 60 * 24 * 7
+	);
+}
+
 export function millisecondsToHumanUnits(milliseconds: number) {
 	let seconds = Math.floor(milliseconds / 1000);
 	let minutes = Math.floor(seconds / 60);

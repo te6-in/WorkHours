@@ -1,23 +1,20 @@
+import { icalDurationToMilliseconds } from "@/scripts/time-conversions";
+import IcalExpander from "ical-expander";
 import * as ICAL from "ical.js";
 
 export class Event {
 	readonly durationMilliseconds: number;
 
-	constructor(
-		readonly start: Date,
-		readonly end: Date,
-		readonly recurRules: any, // TODO: type
-		readonly excludedDates: Date[] | null
-	) {
-		if (recurRules === null) {
-			this.durationMilliseconds = this.end.getTime() - this.start.getTime();
-		} else {
-			this.durationMilliseconds = 0; // TODO: calculate duration
-		}
+	constructor(readonly start: ICAL.Time, readonly end: ICAL.Time) {
+		const period = new ICAL.Period({ start, end });
+
+		this.durationMilliseconds = icalDurationToMilliseconds(
+			period.getDuration()
+		);
 	}
 }
 
-export class Events {
+export class EventsBySummary {
 	durationMilliseconds: number;
 
 	constructor(readonly summary: string, readonly events: Event[]) {
@@ -32,56 +29,52 @@ export class Events {
 	}
 }
 
-export type Calendar = Events[];
+export type Calendar = EventsBySummary[];
 
-function getDate(data: ICAL.Time) {
-	return new Date(
-		data.year,
-		data.month - 1,
-		data.day,
-		data.hour,
-		data.minute,
-		data.second
+function addToCalendar(
+	calendar: Calendar,
+	summary: string,
+	{ startDate, endDate }: { startDate: ICAL.Time; endDate: ICAL.Time }
+) {
+	const newEvent = new Event(startDate, endDate);
+
+	const index = calendar.findIndex(
+		(calendarEvents) => calendarEvents.summary === summary
 	);
+
+	if (index === -1) {
+		calendar.push(new EventsBySummary(summary, [newEvent]));
+	} else {
+		calendar[index].events.push(newEvent);
+	}
 }
 
 export function getCalendar(icalData: string) {
 	const calendar: Calendar = [];
-
-	const jcalData = ICAL.parse(icalData);
-	const componentData = new ICAL.Component(jcalData);
-	const events = componentData.getAllSubcomponents("vevent");
-
-	events.forEach((event) => {
-		const summary = event.getFirstPropertyValue("summary");
-		const excludedDates =
-			event.getAllProperties("exdate").length === 0
-				? null
-				: event.getAllProperties("exdate").map((exdate) => {
-						const excludeData = exdate.getFirstValue()._time as ICAL.Time;
-						return getDate(excludeData);
-				  });
-
-		const newEvent = new Event(
-			getDate(event.getFirstPropertyValue("dtstart")._time),
-			getDate(event.getFirstPropertyValue("dtend")._time),
-			event.getFirstPropertyValue("rrule"),
-			excludedDates
-		);
-
-		const index = calendar.findIndex(
-			(calendarEvent) => calendarEvent.summary === summary
-		);
-
-		if (index === -1) {
-			calendar.push(new Events(summary, [newEvent]));
-		} else {
-			calendar[index].events.push(newEvent);
-		}
+	const expander = new IcalExpander({
+		ics: icalData,
+		maxIterations: 2000,
 	});
 
-	calendar.forEach((events) => {
-		events.setDurationMilliseconds();
+	// TODO: set proper before date
+	const expandedData = expander.all();
+
+	expandedData.events.forEach((event) => {
+		const summary = event.component.getFirstPropertyValue("summary");
+		const { startDate, endDate } = event;
+
+		addToCalendar(calendar, summary, { startDate, endDate });
+	});
+
+	expandedData.occurrences.forEach((occurrence) => {
+		const summary = occurrence.item.component.getFirstPropertyValue("summary");
+		const { startDate, endDate } = occurrence;
+
+		addToCalendar(calendar, summary, { startDate, endDate });
+	});
+
+	calendar.forEach((eventsBySummary) => {
+		eventsBySummary.setDurationMilliseconds();
 	});
 
 	calendar.sort((a, b) => {
