@@ -5,7 +5,8 @@ import { Receipt } from "@/components/Result/Receipt";
 import { ScrollToResultButton } from "@/components/Result/ScrollToResultButton";
 import {
 	Calendar,
-	getHumanFirstAndLastEventDate,
+	getFirstAndLastEventDate,
+	getFirstAndLastHumanString,
 	getHumanStringFromPickerString,
 } from "@/scripts/calendar";
 import { getResults, Result } from "@/scripts/counts-by-durations";
@@ -180,7 +181,9 @@ export function ResultCards({
 												</p>
 											) : (
 												<p className="text-sm text-zinc-400">
-													{getHumanFirstAndLastEventDate(calendar)}
+													{getFirstAndLastHumanString(
+														getFirstAndLastEventDate(calendar)
+													)}
 												</p>
 											)}
 										</>

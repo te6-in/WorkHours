@@ -1,4 +1,8 @@
-import { getPickerStringFromDate } from "@/scripts/calendar";
+import {
+	getCalendar,
+	getFirstAndLastEventDate,
+	getPickerStringFromDate,
+} from "@/scripts/calendar";
 import {
 	Dispatch,
 	MouseEventHandler,
@@ -139,6 +143,24 @@ const presetDurations: PresetDuration[] = [
 
 export function Filter({ icalData, duration, setDuration }: FilterProps) {
 	const [isCustomDuration, setIsCustomDuration] = useState(false);
+	let minDate, maxDate;
+
+	if (icalData) {
+		const fullCalendar = getCalendar(icalData, {
+			after: undefined,
+			before: undefined,
+		});
+
+		if (fullCalendar) {
+			const dates = getFirstAndLastEventDate(fullCalendar);
+
+			if (dates) {
+				minDate = dates.first ?? undefined;
+				maxDate = dates.last ?? undefined;
+			}
+		}
+	}
+
 	const handleCustomDurationClick = () => {
 		setIsCustomDuration(true);
 
@@ -214,7 +236,8 @@ export function Filter({ icalData, duration, setDuration }: FilterProps) {
 					i18n="ko"
 					// primaryColor="emerald"
 					// TODO: add theme
-					// TODO: min date and max date
+					minDate={minDate}
+					maxDate={maxDate}
 					configs={{
 						footer: {
 							cancel: "취소",

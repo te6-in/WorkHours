@@ -13,7 +13,7 @@ import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 function App() {
 	const [icalData, setIcalData] = useState<string | null>(null);
 	const [calendar, setCalendar] = useState<Calendar | null>(null);
-	// TODO: default values
+	// TODO: default values when there're too many events
 	const [duration, setDuration] = useState<DateValueType>({
 		startDate: null,
 		endDate: null,

@@ -67,7 +67,6 @@ export function getCalendar(
 		ics: icalData,
 	});
 
-	// TODO: set proper before date
 	const expandedData = expander.between(after, before);
 
 	expandedData.events.forEach((event) => {
@@ -99,7 +98,7 @@ export function getCalendar(
 	return calendar;
 }
 
-export function getHumanFirstAndLastEventDate(calendar: Calendar) {
+export function getFirstAndLastEventDate(calendar: Calendar) {
 	const result: {
 		first: ICAL.Time | null;
 		last: ICAL.Time | null;
@@ -121,12 +120,25 @@ export function getHumanFirstAndLastEventDate(calendar: Calendar) {
 	});
 
 	if (result.first === null || result.last === null) {
-		return null;
+		return {
+			first: new Date(),
+			last: new Date(),
+		};
 	}
 
-	const first = result.first.toJSDate();
-	const last = result.last.toJSDate();
+	return {
+		first: result.first.toJSDate(),
+		last: result.last.toJSDate(),
+	};
+}
 
+export function getFirstAndLastHumanString({
+	first,
+	last,
+}: {
+	first: Date;
+	last: Date;
+}) {
 	return `${first.getFullYear()}년 ${
 		first.getMonth() + 1
 	}월 ${first.getDate()}일부터 ${last.getFullYear()}년 ${

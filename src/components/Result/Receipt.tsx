@@ -47,9 +47,9 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 								{receipt.map((item, index) => (
 									<li
 										key={index}
-										className="flex flex-col flex-wrap justify-between rounded-lg bg-zinc-200 px-3.5 py-3"
+										className="flex flex-wrap justify-between gap-1 rounded-lg bg-zinc-200 px-3.5 py-3"
 									>
-										<div className="mr-2 font-medium text-zinc-700">
+										<div className="font-medium text-zinc-700">
 											{item.summary}
 										</div>
 										<div className="ml-auto font-bold">
