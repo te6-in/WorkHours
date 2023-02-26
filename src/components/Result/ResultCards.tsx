@@ -19,22 +19,31 @@ import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
 interface ResultProps {
 	calendar: Calendar;
+	setCalendar: Dispatch<SetStateAction<Calendar | null>>;
+	duration: DateValueType;
+	setDuration: Dispatch<SetStateAction<DateValueType>>;
 	hideNoneAvailables: boolean;
 	setHideNoneAvailables: Dispatch<SetStateAction<boolean>>;
 	setData: (data: string) => void;
 }
 
+function PresetButton({ text }: { text: string }) {
+	return (
+		<button className="rounded-xl bg-zinc-300 px-3 py-2 text-sm font-medium text-zinc-900">
+			{text}
+		</button>
+	);
+}
+
 export function ResultCards({
 	calendar,
+	setCalendar,
+	duration,
+	setDuration,
 	hideNoneAvailables,
 	setHideNoneAvailables,
 	setData,
 }: ResultProps) {
-	// TODO: default values
-	const [duration, setDuration] = useState<DateValueType>({
-		startDate: null,
-		endDate: null,
-	});
 	const [results, setResults] = useState<Result[] | null>(null);
 	const receiptRef = useRef<HTMLDivElement>(null);
 
@@ -79,14 +88,17 @@ export function ResultCards({
 					{results.length > 0 && (
 						<>
 							<div className="w-full max-w-xl rounded-2xl bg-zinc-200 p-4">
+								<div>필터</div>
+								<p>
+									필터를 변경하면 기존에 선택한 내용은 모두 선택 해제됩니다.
+								</p>
 								<Datepicker
 									placeholder="기간을 선택하세요."
 									value={duration}
 									readOnly={true}
 									useRange={false}
-									showShortcuts={true}
 									showFooter={true}
-									inputClassName="text-center pl-2.5 pr-2.5"
+									inputClassName="text-center pl-2.5 pr-2.5 rounded-xl"
 									toggleClassName="hidden"
 									i18n="ko"
 									displayFormat="YYYY년 MM월 DD일"
@@ -94,13 +106,6 @@ export function ResultCards({
 									// TODO: add theme
 									// TODO: min date and max date
 									configs={{
-										shortcuts: {
-											today: "오늘",
-											yesterday: "어제",
-											past: (period) => `지난 ${period}일`,
-											currentMonth: "이번 달 전체",
-											pastMonth: "지난 달 전체",
-										},
 										footer: {
 											cancel: "취소",
 											apply: "확인",
@@ -108,6 +113,16 @@ export function ResultCards({
 									}}
 									onChange={(newDuration) => setDuration(newDuration)}
 								/>
+								<div className="grid grid-cols-4 gap-2">
+									<PresetButton text="오늘" />
+									<PresetButton text="지난 7일" />
+									<PresetButton text="지난 30일" />
+									<PresetButton text="지난 1년" />
+									<PresetButton text="이번 달 오늘까지" />
+									<PresetButton text="이번 달 전체" />
+									<PresetButton text="올해 오늘까지" />
+									<PresetButton text="모든 이벤트" />
+								</div>
 							</div>
 							<ul className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
 								{(firstNoneAvailableResultIndex === -1 ||

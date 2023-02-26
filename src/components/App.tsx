@@ -2,19 +2,27 @@ import { DropZone } from "@/components/DropZone";
 import { Footer } from "@/components/Footer";
 import { Info } from "@/components/Info";
 import { ResultCards } from "@/components/Result/ResultCards";
-import { Calendar, getCalendar } from "@/scripts/calendar";
+import { Calendar, getCalendar, getDateFromPicker } from "@/scripts/calendar";
 import { useEffect, useState } from "react";
+import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
 function App() {
 	const [icalData, setICalData] = useState<string | null>(null);
 	const [calendar, setCalendar] = useState<Calendar | null>(null);
+	// TODO: default values
+	const [duration, setDuration] = useState<DateValueType>({
+		startDate: null,
+		endDate: null,
+	});
 	const [hideNoneAvailables, setHideNotAvailables] = useState(true);
 
 	useEffect(() => {
 		if (icalData) {
-			setCalendar(getCalendar(icalData));
+			console.log(getDateFromPicker(duration));
+
+			setCalendar(getCalendar(icalData, getDateFromPicker(duration)));
 		}
-	}, [icalData]);
+	}, [icalData, duration]);
 
 	return (
 		<DropZone
@@ -34,6 +42,9 @@ function App() {
 				{calendar && (
 					<ResultCards
 						calendar={calendar}
+						setCalendar={setCalendar}
+						duration={duration}
+						setDuration={setDuration}
 						hideNoneAvailables={hideNoneAvailables}
 						setHideNoneAvailables={setHideNotAvailables}
 						setData={setICalData}

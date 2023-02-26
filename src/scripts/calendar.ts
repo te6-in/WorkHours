@@ -1,6 +1,7 @@
 import { icalDurationToMilliseconds } from "@/scripts/time-conversions";
 import IcalExpander from "ical-expander";
 import * as ICAL from "ical.js";
+import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
 export class Event {
 	readonly durationMilliseconds: number;
@@ -49,7 +50,10 @@ function addToCalendar(
 	}
 }
 
-export function getCalendar(icalData: string) {
+export function getCalendar(
+	icalData: string,
+	{ after, before }: { after?: Date; before?: Date }
+): Calendar {
 	const calendar: Calendar = [];
 	const expander = new IcalExpander({
 		ics: icalData,
@@ -57,7 +61,7 @@ export function getCalendar(icalData: string) {
 	});
 
 	// TODO: set proper before date
-	const expandedData = expander.all();
+	const expandedData = expander.between(after, before);
 
 	expandedData.events.forEach((event) => {
 		const summary = event.component.getFirstPropertyValue("summary");
@@ -86,4 +90,28 @@ export function getCalendar(icalData: string) {
 	});
 
 	return calendar;
+}
+
+export function getDateFromPicker(duration: DateValueType) {
+	const result: { after?: Date; before?: Date } = {};
+
+	if (duration) {
+		if (duration.startDate && typeof duration.startDate === "string") {
+			const [year, month, day] = duration.startDate
+				.split("-")
+				.map((value) => parseInt(value));
+
+			result.after = new Date(year, month - 1, day, 0, 0, 0, 0);
+		}
+
+		if (duration.endDate && typeof duration.endDate === "string") {
+			const [year, month, day] = duration.endDate
+				.split("-")
+				.map((value) => parseInt(value));
+
+			result.before = new Date(year, month - 1, day, 23, 59, 59, 999);
+		}
+	}
+
+	return result;
 }

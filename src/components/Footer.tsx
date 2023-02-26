@@ -105,10 +105,10 @@ export function Footer() {
 				/>
 				<br />
 				{data.map((item, index) => (
-					<>
+					<span key={index}>
 						<License href={item.url} text={item.name} />
 						{index !== data.length - 1 && " | "}
-					</>
+					</span>
 				))}
 			</span>
 		</footer>
