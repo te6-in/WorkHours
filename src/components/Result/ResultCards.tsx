@@ -1,5 +1,5 @@
 import { Note } from "@/components/Note";
-import { EventsCard } from "@/components/Result/EventsCard";
+import { ButtonProps, EventsCard } from "@/components/Result/EventsCard";
 import { Filter } from "@/components/Result/Filter";
 import { Receipt } from "@/components/Result/Receipt";
 import { ScrollToResultButton } from "@/components/Result/ScrollToResultButton";
@@ -26,6 +26,20 @@ interface ResultProps {
 	setData: (data: string) => void;
 }
 
+function Button({ text, disabled, onClick }: ButtonProps) {
+	return (
+		<button
+			onClick={onClick}
+			disabled={disabled}
+			className={`rounded-xl bg-zinc-600 px-3 py-2 text-zinc-100 ${
+				disabled && "cursor-not-allowed opacity-50"
+			}`}
+		>
+			{text}
+		</button>
+	);
+}
+
 export function ResultCards({
 	calendar,
 	duration,
@@ -44,6 +58,58 @@ export function ResultCards({
 				)
 		  )
 		: -1;
+
+	const allChecked = results
+		? results.every((result) =>
+				result.countsByDurations.every(
+					(countByDuration) => countByDuration.checked
+				)
+		  )
+		: false;
+
+	const noneChecked = results
+		? results.every((result) =>
+				result.countsByDurations.every(
+					(countByDuration) => !countByDuration.checked
+				)
+		  )
+		: false;
+
+	const onSelectAllClick = () => {
+		setResults((prevResults) => {
+			if (prevResults === null) {
+				return null;
+			}
+
+			const newResults = [...prevResults];
+
+			newResults.forEach((result) => {
+				result.countsByDurations.forEach(
+					(countByDuration) => (countByDuration.checked = true)
+				);
+			});
+
+			return newResults;
+		});
+	};
+
+	const onSelectNoneClick = () => {
+		setResults((prevResults) => {
+			if (prevResults === null) {
+				return null;
+			}
+
+			const newResults = [...prevResults];
+
+			newResults.forEach((result) => {
+				result.countsByDurations.forEach(
+					(countByDuration) => (countByDuration.checked = false)
+				);
+			});
+
+			return newResults;
+		});
+	};
 
 	useEffect(() => {
 		if (calendar) {
@@ -77,9 +143,28 @@ export function ResultCards({
 			{results && (
 				<>
 					{results.length > 0 && (
-						<>
-							<h2 className="sr-only">발견된 일정</h2>
-							<ul className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
+						<div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
+							<div className="flex items-center justify-between">
+								<div className="ml-2">
+									<h2 className="text-lg font-medium text-zinc-200">
+										발견된 일정
+									</h2>
+									<p className="text-sm text-zinc-400"> ~ </p>
+								</div>
+								<div className="flex justify-end gap-2">
+									<Button
+										disabled={allChecked}
+										onClick={onSelectAllClick}
+										text="모두 선택"
+									/>
+									<Button
+										disabled={noneChecked}
+										onClick={onSelectNoneClick}
+										text="모두 선택 해제"
+									/>
+								</div>
+							</div>
+							<ul className="flex flex-col gap-4">
 								{(firstNoneAvailableResultIndex === -1 ||
 									!hideNoneAvailables) &&
 									results.map((result, index) => (
@@ -110,7 +195,7 @@ export function ResultCards({
 									</>
 								)}
 							</ul>
-						</>
+						</div>
 					)}
 					{<Receipt results={results} ref={receiptRef} />}
 				</>

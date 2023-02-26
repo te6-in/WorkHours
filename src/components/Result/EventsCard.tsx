@@ -1,17 +1,17 @@
 import { DurationChip } from "@/components/Result/DurationChip";
 import { Result } from "@/scripts/counts-by-durations";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 interface EventsCardProps {
 	result: Result;
 	setResults: Dispatch<SetStateAction<Result[] | null>>;
 }
 
-interface ButtonProps {
+export interface ButtonProps {
 	text: string;
 	disabled: boolean;
-	onClick: () => void;
+	onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 function Button({ text, disabled, onClick }: ButtonProps) {
