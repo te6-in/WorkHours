@@ -3,7 +3,11 @@ import { ButtonProps, EventsCard } from "@/components/Result/EventsCard";
 import { Filter } from "@/components/Result/Filter";
 import { Receipt } from "@/components/Result/Receipt";
 import { ScrollToResultButton } from "@/components/Result/ScrollToResultButton";
-import { Calendar } from "@/scripts/calendar";
+import {
+	Calendar,
+	getHumanFirstAndLastEventDate,
+	getHumanStringFromPickerString,
+} from "@/scripts/calendar";
 import { getResults, Result } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
@@ -162,14 +166,27 @@ export function ResultCards({
 				<>
 					{results.length > 0 && (
 						<div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
-							<div className="flex items-center justify-between">
+							<div className="flex flex-wrap items-center justify-between gap-4">
 								<div className="ml-2">
 									<h2 className="text-lg font-medium text-zinc-200">
 										발견된 일정 {count}개
 									</h2>
-									<p className="text-sm text-zinc-400"> ~ </p>
+									{duration && (
+										<>
+											{duration.startDate !== null &&
+											duration.endDate !== null ? (
+												<p className="text-sm text-zinc-400">
+													{getHumanStringFromPickerString(duration)}
+												</p>
+											) : (
+												<p className="text-sm text-zinc-400">
+													{getHumanFirstAndLastEventDate(calendar)}
+												</p>
+											)}
+										</>
+									)}
 								</div>
-								<div className="flex justify-end gap-2">
+								<div className="ml-auto flex justify-end gap-2">
 									<Button
 										disabled={allChecked}
 										onClick={onSelectAllClick}

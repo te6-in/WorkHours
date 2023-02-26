@@ -99,6 +99,41 @@ export function getCalendar(
 	return calendar;
 }
 
+export function getHumanFirstAndLastEventDate(calendar: Calendar) {
+	const result: {
+		first: ICAL.Time | null;
+		last: ICAL.Time | null;
+	} = {
+		first: null,
+		last: null,
+	};
+
+	calendar.forEach((eventsBySummary) => {
+		eventsBySummary.events.forEach((event) => {
+			if (result.first === null || result.first.compare(event.start) > 0) {
+				result.first = event.start;
+			}
+
+			if (result.last === null || result.last.compare(event.end) < 0) {
+				result.last = event.end;
+			}
+		});
+	});
+
+	if (result.first === null || result.last === null) {
+		return null;
+	}
+
+	const first = result.first.toJSDate();
+	const last = result.last.toJSDate();
+
+	return `${first.getFullYear()}년 ${
+		first.getMonth() + 1
+	}월 ${first.getDate()}일부터 ${last.getFullYear()}년 ${
+		last.getMonth() + 1
+	}월 ${last.getDate()}일까지`;
+}
+
 export function getDateFromPickerString(duration: DateValueType) {
 	const result: DatesDuration = {
 		after: undefined,
@@ -145,4 +180,26 @@ export function getPickerStringFromDate(duration: DatesDuration) {
 	}
 
 	return result;
+}
+
+export function getHumanStringFromPickerString(duration: DateRangeType) {
+	const result: string[] = [];
+
+	if (duration.startDate && typeof duration.startDate === "string") {
+		const [year, month, day] = duration.startDate
+			.split("-")
+			.map((value) => parseInt(value));
+
+		result.push(`${year}년 ${month}월 ${day}일부터`);
+	}
+
+	if (duration.endDate && typeof duration.endDate === "string") {
+		const [year, month, day] = duration.endDate
+			.split("-")
+			.map((value) => parseInt(value));
+
+		result.push(`${year}년 ${month}월 ${day}일까지`);
+	}
+
+	return result.join(" ");
 }
