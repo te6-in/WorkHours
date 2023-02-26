@@ -18,6 +18,7 @@ import {
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
 interface ResultProps {
+	icalData: string | null;
 	calendar: Calendar;
 	duration: DateValueType;
 	setDuration: Dispatch<SetStateAction<DateValueType>>;
@@ -41,6 +42,7 @@ function Button({ text, disabled, onClick }: ButtonProps) {
 }
 
 export function ResultCards({
+	icalData,
 	calendar,
 	duration,
 	setDuration,
@@ -74,6 +76,18 @@ export function ResultCards({
 				)
 		  )
 		: false;
+
+	const count = results
+		? results.reduce(
+				(accumulator, result) =>
+					accumulator +
+					result.countsByDurations.reduce(
+						(acc, countByDuration) => acc + countByDuration.count,
+						0
+					),
+				0
+		  )
+		: 0;
 
 	const onSelectAllClick = () => {
 		setResults((prevResults) => {
@@ -139,7 +153,11 @@ export function ResultCards({
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
 			<ScrollToResultButton to={receiptRef} />
-			<Filter duration={duration} setDuration={setDuration} />
+			<Filter
+				icalData={icalData}
+				duration={duration}
+				setDuration={setDuration}
+			/>
 			{results && (
 				<>
 					{results.length > 0 && (
@@ -147,7 +165,7 @@ export function ResultCards({
 							<div className="flex items-center justify-between">
 								<div className="ml-2">
 									<h2 className="text-lg font-medium text-zinc-200">
-										발견된 일정
+										발견된 일정 {count}개
 									</h2>
 									<p className="text-sm text-zinc-400"> ~ </p>
 								</div>

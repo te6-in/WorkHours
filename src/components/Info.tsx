@@ -4,7 +4,7 @@ import { scrollToTop } from "@/scripts/scroll";
 import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from "react";
 
 interface InfoProps {
-	setICalData: (data: string) => void;
+	setIcalData: (data: string) => void;
 	setHideNoneAvailables: Dispatch<SetStateAction<boolean>>;
 	uploaded: boolean;
 }
@@ -18,7 +18,7 @@ function Description({ children }: { children: ReactNode }) {
 }
 
 export function Info({
-	setICalData,
+	setIcalData,
 	setHideNoneAvailables,
 	uploaded,
 }: InfoProps) {
@@ -30,7 +30,7 @@ export function Info({
 		const file = files ? files[0] : null;
 
 		if (file) {
-			readFile(file, setICalData, setHideNoneAvailables);
+			readFile(file, setIcalData, setHideNoneAvailables);
 			scrollToTop(100);
 		}
 	};

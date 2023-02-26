@@ -1,5 +1,11 @@
 import { getPickerStringFromDate } from "@/scripts/calendar";
-import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
+import {
+	Dispatch,
+	MouseEventHandler,
+	SetStateAction,
+	useEffect,
+	useState,
+} from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import {
 	DateRangeType,
@@ -7,6 +13,7 @@ import {
 } from "react-tailwindcss-datepicker/dist/types";
 
 interface FilterProps {
+	icalData: string | null;
 	duration: DateValueType;
 	setDuration: Dispatch<SetStateAction<DateValueType>>;
 }
@@ -130,7 +137,7 @@ const presetDurations: PresetDuration[] = [
 	},
 ];
 
-export function Filter({ duration, setDuration }: FilterProps) {
+export function Filter({ icalData, duration, setDuration }: FilterProps) {
 	const [isCustomDuration, setIsCustomDuration] = useState(false);
 	const handleCustomDurationClick = () => {
 		setIsCustomDuration(true);
@@ -139,6 +146,21 @@ export function Filter({ duration, setDuration }: FilterProps) {
 			presetDuration.on = false;
 		});
 	};
+
+	useEffect(() => {
+		setDuration({
+			startDate: null,
+			endDate: null,
+		});
+
+		setIsCustomDuration(false);
+
+		presetDurations.forEach((presetDuration) => {
+			presetDuration.on = false;
+		});
+
+		presetDurations[presetDurations.length - 1].on = true;
+	}, [icalData]);
 
 	return (
 		<div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-200 p-4">

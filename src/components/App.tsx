@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
 function App() {
-	const [icalData, setICalData] = useState<string | null>(null);
+	const [icalData, setIcalData] = useState<string | null>(null);
 	const [calendar, setCalendar] = useState<Calendar | null>(null);
 	// TODO: default values
 	const [duration, setDuration] = useState<DateValueType>({
@@ -22,21 +22,20 @@ function App() {
 
 	useEffect(() => {
 		if (icalData) {
-			console.log(duration);
 			setCalendar(getCalendar(icalData, getDateFromPickerString(duration)));
 		}
 	}, [icalData, duration]);
 
 	return (
 		<DropZone
-			setICalData={setICalData}
+			setIcalData={setIcalData}
 			setHideNoneAvailables={setHideNotAvailables}
 			uploaded={!!icalData}
 		>
 			<main className="px-6 pt-12">
 				<section>
 					<Info
-						setICalData={setICalData}
+						setIcalData={setIcalData}
 						setHideNoneAvailables={setHideNotAvailables}
 						uploaded={!!icalData}
 					/>
@@ -44,12 +43,13 @@ function App() {
 				{/* TODO: add an example */}
 				{calendar && (
 					<ResultCards
+						icalData={icalData}
 						calendar={calendar}
 						duration={duration}
 						setDuration={setDuration}
 						hideNoneAvailables={hideNoneAvailables}
 						setHideNoneAvailables={setHideNotAvailables}
-						setData={setICalData}
+						setData={setIcalData}
 					/>
 				)}
 			</main>
