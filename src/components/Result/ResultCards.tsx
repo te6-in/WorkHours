@@ -1,5 +1,6 @@
 import { Note } from "@/components/Note";
 import { EventsCard } from "@/components/Result/EventsCard";
+import { Filter } from "@/components/Result/Filter";
 import { Receipt } from "@/components/Result/Receipt";
 import { ScrollToResultButton } from "@/components/Result/ScrollToResultButton";
 import { Calendar } from "@/scripts/calendar";
@@ -14,12 +15,10 @@ import {
 	useRef,
 	useState,
 } from "react";
-import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
 interface ResultProps {
 	calendar: Calendar;
-	setCalendar: Dispatch<SetStateAction<Calendar | null>>;
 	duration: DateValueType;
 	setDuration: Dispatch<SetStateAction<DateValueType>>;
 	hideNoneAvailables: boolean;
@@ -27,17 +26,8 @@ interface ResultProps {
 	setData: (data: string) => void;
 }
 
-function PresetButton({ text }: { text: string }) {
-	return (
-		<button className="rounded-xl bg-zinc-300 px-3 py-2 text-sm font-medium text-zinc-900">
-			{text}
-		</button>
-	);
-}
-
 export function ResultCards({
 	calendar,
-	setCalendar,
 	duration,
 	setDuration,
 	hideNoneAvailables,
@@ -83,47 +73,12 @@ export function ResultCards({
 	return (
 		<section className="mt-10 flex flex-col items-center gap-6">
 			<ScrollToResultButton to={receiptRef} />
+			<Filter duration={duration} setDuration={setDuration} />
 			{results && (
 				<>
 					{results.length > 0 && (
 						<>
-							<div className="w-full max-w-xl rounded-2xl bg-zinc-200 p-4">
-								<div>필터</div>
-								<p>
-									필터를 변경하면 기존에 선택한 내용은 모두 선택 해제됩니다.
-								</p>
-								<Datepicker
-									placeholder="기간을 선택하세요."
-									value={duration}
-									readOnly={true}
-									useRange={false}
-									showFooter={true}
-									inputClassName="text-center pl-2.5 pr-2.5 rounded-xl"
-									toggleClassName="hidden"
-									i18n="ko"
-									displayFormat="YYYY년 MM월 DD일"
-									// primaryColor="emerald"
-									// TODO: add theme
-									// TODO: min date and max date
-									configs={{
-										footer: {
-											cancel: "취소",
-											apply: "확인",
-										},
-									}}
-									onChange={(newDuration) => setDuration(newDuration)}
-								/>
-								<div className="grid grid-cols-4 gap-2">
-									<PresetButton text="오늘" />
-									<PresetButton text="지난 7일" />
-									<PresetButton text="지난 30일" />
-									<PresetButton text="지난 1년" />
-									<PresetButton text="이번 달 오늘까지" />
-									<PresetButton text="이번 달 전체" />
-									<PresetButton text="올해 오늘까지" />
-									<PresetButton text="모든 이벤트" />
-								</div>
-							</div>
+							<h2 className="sr-only">발견된 일정</h2>
 							<ul className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-800 p-4">
 								{(firstNoneAvailableResultIndex === -1 ||
 									!hideNoneAvailables) &&

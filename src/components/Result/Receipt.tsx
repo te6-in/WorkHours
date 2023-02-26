@@ -17,6 +17,7 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 				className="w-full max-w-xl scroll-mt-6 rounded-2xl bg-zinc-50 p-8 text-zinc-900 shadow-lg"
 			>
 				<>
+					<h2 className="sr-only">결과</h2>
 					{receipt.length > 0 ? (
 						<>
 							<div className="-mt-2 flex items-end justify-between">
@@ -34,12 +35,12 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 									<polyline points="22 4 12 14.01 9 11.01"></polyline>
 								</svg>
 								<div>
-									<div className="text-right text-5xl font-black leading-snug">
+									<h3 className="text-right text-5xl font-black leading-snug">
 										총 {getHumanStringFromMilliseconds(totalSelectedDuration)}
-									</div>
-									<div className="text-right text-xl font-medium text-zinc-500">
+									</h3>
+									<p className="text-right text-xl font-medium text-zinc-500">
 										수고하셨습니다.
-									</div>
+									</p>
 								</div>
 							</div>
 							<ul className="mt-6 flex flex-col gap-2 sm:grid sm:grid-cols-2">
@@ -68,9 +69,9 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 								</>
 							) : (
 								<>
-									업로드한 파일에 불러올 수 있는 일정이 없습니다.
+									선택한 기간에 등록된 일정이 없습니다.
 									<br />
-									다른 캘린더 파일을 선택해보세요.
+									필터의 기간을 변경하거나 다른 캘린더 파일을 선택해보세요.
 								</>
 							)}
 						</div>

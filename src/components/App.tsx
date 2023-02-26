@@ -2,7 +2,11 @@ import { DropZone } from "@/components/DropZone";
 import { Footer } from "@/components/Footer";
 import { Info } from "@/components/Info";
 import { ResultCards } from "@/components/Result/ResultCards";
-import { Calendar, getCalendar, getDateFromPicker } from "@/scripts/calendar";
+import {
+	Calendar,
+	getCalendar,
+	getDateFromPickerString,
+} from "@/scripts/calendar";
 import { useEffect, useState } from "react";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 
@@ -18,9 +22,8 @@ function App() {
 
 	useEffect(() => {
 		if (icalData) {
-			console.log(getDateFromPicker(duration));
-
-			setCalendar(getCalendar(icalData, getDateFromPicker(duration)));
+			console.log(duration);
+			setCalendar(getCalendar(icalData, getDateFromPickerString(duration)));
 		}
 	}, [icalData, duration]);
 
@@ -42,7 +45,6 @@ function App() {
 				{calendar && (
 					<ResultCards
 						calendar={calendar}
-						setCalendar={setCalendar}
 						duration={duration}
 						setDuration={setDuration}
 						hideNoneAvailables={hideNoneAvailables}

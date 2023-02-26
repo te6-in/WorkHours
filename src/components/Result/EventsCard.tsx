@@ -126,7 +126,7 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 			${noneAvailable ? "opacity-50" : ""}`}
 		>
 			<div className="mb-3 ml-1 flex flex-wrap items-center justify-between text-lg font-semibold text-zinc-900">
-				<div className="mr-4">{result.summary}</div>
+				<h3 className="mr-4">{result.summary}</h3>
 				<div className="ml-auto text-right text-base font-medium text-zinc-600">
 					{`${
 						selectedTotalCount === 0
