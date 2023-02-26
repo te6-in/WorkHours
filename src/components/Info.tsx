@@ -38,7 +38,7 @@ export function Info({
 	return (
 		<>
 			<a
-				href="/workhours/"
+				href="/work-hours/"
 				className="m-auto flex w-fit select-none items-center justify-center gap-2"
 			>
 				<svg
@@ -76,7 +76,7 @@ export function Info({
 						일정 별로 사용한 시간과 시급을 계산해줍니다.
 					</Description>
 					<Note
-						text="업로드한 파일은 브라우저에서만 처리되며 어디에도 저장되지 않습니다."
+						text="업로드한 파일은 브라우저에서만 처리되며 온라인으로 전송되지 않습니다."
 						moreClasses="mt-2"
 					/>
 					<input
@@ -96,7 +96,7 @@ export function Info({
 							</label>
 							<Note text="또는 끌어다 놓기" />
 						</div>
-						<button className="h-fit rounded-xl border-2 border-zinc-50 py-3 px-5 text-lg text-zinc-50 ">
+						<button className="h-fit cursor-not-allowed rounded-xl border-2 border-zinc-50 py-3 px-5 text-lg text-zinc-50 opacity-50 ">
 							파일 받는 법
 						</button>
 					</div>

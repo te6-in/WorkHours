@@ -170,7 +170,7 @@ export function ResultCards({
 							<div className="flex flex-wrap items-center justify-between gap-4">
 								<div className="ml-2">
 									<h2 className="text-lg font-medium text-zinc-200">
-										발견된 일정 {count}개
+										발견된 일정 {count.toLocaleString()}개
 									</h2>
 									{duration && (
 										<>

@@ -74,7 +74,7 @@ export function Footer() {
 					/>
 					te6.in 개발·디자인 블로그
 				</Button>
-				<Button href="https://github.com/te6-in/WorkHours">
+				<Button href="https://github.com/te6-in/work-hours">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
@@ -91,16 +91,16 @@ export function Footer() {
 					GitHub 레포지토리
 				</Button>
 			</div>
-			<Link href="https://github.com/te6-in/WorkHours/">
+			<Link href="https://github.com/te6-in/work-hours/">
 				<img
 					alt="GitHub 레포지토리 Stars 수"
-					src="https://img.shields.io/github/stars/te6-in/WorkHours?style=social"
+					src="https://img.shields.io/github/stars/te6-in/work-hours?style=social"
 				/>
 			</Link>
 			<span className="text-center text-sm leading-6 text-zinc-500">
 				라이선스:{" "}
 				<License
-					href="https://github.com/te6-in/WorkHours/blob/main/LICENSE"
+					href="https://github.com/te6-in/work-hours/blob/main/LICENSE"
 					text="MPL-2.0"
 				/>
 				<br />

@@ -14,7 +14,7 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 		return (
 			<div
 				ref={ref}
-				className="w-full max-w-xl scroll-mt-6 rounded-2xl bg-zinc-50 p-8 text-zinc-900 shadow-lg"
+				className="w-full max-w-xl scroll-mt-6 rounded-2xl bg-zinc-100 p-8 text-zinc-900 shadow-lg"
 			>
 				<>
 					<h2 className="sr-only">결과</h2>

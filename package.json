@@ -1,33 +1,37 @@
 {
-  "name": "workhours",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "framer-motion": "^9.0.2",
-    "ical-expander": "^3.1.0",
-    "ical.js": "^1.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
-    "react-tailwindcss-datepicker": "^1.4.2"
-  },
-  "devDependencies": {
-    "@types/node": "^18.13.0",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.1.0",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "prettier": "^2.8.3",
-    "prettier-plugin-tailwindcss": "^0.2.2",
-    "tailwindcss": "^3.2.4",
-    "typescript": "^4.9.3",
-    "vite": "^4.1.0"
-  }
+	"name": "work-hours",
+	"private": true,
+	"version": "0.0.0",
+	"homepage": "https://te6.in/work-hours",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
+	},
+	"dependencies": {
+		"framer-motion": "^9.0.2",
+		"ical-expander": "^3.1.0",
+		"ical.js": "^1.5.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-dropzone": "^14.2.3",
+		"react-tailwindcss-datepicker": "^1.4.2"
+	},
+	"devDependencies": {
+		"@types/node": "^18.13.0",
+		"@types/react": "^18.0.27",
+		"@types/react-dom": "^18.0.10",
+		"@vitejs/plugin-react": "^3.1.0",
+		"autoprefixer": "^10.4.13",
+		"gh-pages": "^5.0.0",
+		"postcss": "^8.4.21",
+		"prettier": "^2.8.3",
+		"prettier-plugin-tailwindcss": "^0.2.2",
+		"tailwindcss": "^3.2.4",
+		"typescript": "^4.9.3",
+		"vite": "^4.1.0"
+	}
 }

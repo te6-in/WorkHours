@@ -185,7 +185,7 @@ export function Filter({ icalData, duration, setDuration }: FilterProps) {
 	}, [icalData]);
 
 	return (
-		<div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-200 p-4">
+		<div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-100 p-4 shadow-lg">
 			<div>
 				<div className="flex items-center justify-center gap-1 text-lg font-bold text-zinc-900">
 					<svg

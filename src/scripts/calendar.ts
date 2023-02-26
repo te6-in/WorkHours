@@ -65,6 +65,7 @@ export function getCalendar(
 	const calendar: Calendar = [];
 	const expander = new IcalExpander({
 		ics: icalData,
+		maxIterations: 200,
 	});
 
 	const expandedData = expander.between(after, before);
