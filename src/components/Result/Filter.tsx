@@ -45,7 +45,7 @@ function Button({ text, on = false, onClick }: ButtonProps) {
 	return (
 		<button
 			onClick={onClick}
-			className={`rounded-xl px-3 py-2 text-sm  ${
+			className={`rounded-xl px-3 py-2 text-sm transition-colors  ${
 				on ? "bg-zinc-800 text-zinc-100" : "bg-zinc-300 text-zinc-900"
 			}`}
 		>
@@ -217,9 +217,9 @@ export function Filter({ icalData, duration, setDuration }: FilterProps) {
 					value={duration}
 					useRange={false}
 					showFooter={true}
-					inputClassName="text-center pl-2.5 pr-2.5 rounded-xl bg-zinc-50 text-zinc-900 font-semibold text-lg"
+					inputClassName="text-center pl-2.5 pr-2.5 bg-zinc-300 rounded-xl text-zinc-900 font-semibold w-full h-10 placeholder-zinc-500"
 					i18n="ko"
-					// primaryColor="emerald"
+					primaryColor="emerald"
 					// TODO: add theme
 					minDate={minDate}
 					maxDate={maxDate}

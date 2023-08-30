@@ -19,7 +19,7 @@ function Button({ text, disabled, onClick }: ButtonProps) {
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`mt-3 rounded-lg bg-zinc-500 px-3 py-2 text-sm font-medium text-zinc-100 ${
+			className={`mt-3 rounded-lg bg-zinc-500 px-3 py-2 text-sm font-medium text-zinc-100 transition-opacity ${
 				disabled && "cursor-not-allowed opacity-50"
 			}`}
 		>
@@ -120,7 +120,7 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 
 	return (
 		<li
-			className={`card rounded-xl p-4 shadow-md ${
+			className={`card rounded-xl p-4 shadow-md transition-colors ${
 				hasChecked ? "bg-zinc-300" : "bg-zinc-400"
 			}
 			${noneAvailable ? "opacity-50" : ""}`}

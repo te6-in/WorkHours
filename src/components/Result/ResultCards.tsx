@@ -9,7 +9,7 @@ import {
 	getFirstAndLastHumanString,
 	getHumanStringFromPickerString,
 } from "@/scripts/calendar";
-import { getResults, Result } from "@/scripts/counts-by-durations";
+import { Result, getResults } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
 import {
@@ -37,7 +37,7 @@ function Button({ text, disabled, onClick }: ButtonProps) {
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`rounded-xl bg-zinc-600 px-3 py-2 text-zinc-100 ${
+			className={`rounded-xl bg-zinc-600 px-3 py-2 text-zinc-100 transition-opacity ${
 				disabled && "cursor-not-allowed opacity-50"
 			}`}
 		>
