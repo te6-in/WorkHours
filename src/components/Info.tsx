@@ -37,7 +37,7 @@ export function Info({
 	};
 
 	const setExampleIcalData = () => {
-		fetch("/example.ics")
+		fetch("/work-hours/example.ics")
 			.then((response) => response.text())
 			.then((data) => setIcalData(data));
 
