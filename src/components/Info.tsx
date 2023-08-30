@@ -1,6 +1,7 @@
 import { Note } from "@/components/Note";
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
+import { Download, GanttChartSquare, TimerReset, Upload } from "lucide-react";
 import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from "react";
 
 interface InfoProps {
@@ -35,30 +36,27 @@ export function Info({
 		}
 	};
 
+	const setExampleIcalData = () => {
+		fetch("/example.ics")
+			.then((response) => response.text())
+			.then((data) => setIcalData(data));
+
+		scrollToTop(100);
+	};
+
 	return (
 		<>
 			<a
 				href="/work-hours/"
-				className="m-auto flex w-fit select-none items-center justify-center gap-2"
+				className="m-auto flex w-fit select-none items-center justify-center gap-2 text-zinc-50"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
+				<TimerReset
+					width={64}
+					height={64}
 					role="img"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					className="h-16 min-h-[4rem] w-16 min-w-[4rem] fill-none stroke-current text-zinc-50"
-				>
-					<title>시계와 화살표가 결합된 아이콘</title>
-					<path d="M10 2h4"></path>
-					<path d="M12 14v-4"></path>
-					<path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6"></path>
-					<path d="M9 17H4v5"></path>
-				</svg>
-				<h1 className="mt-2 mr-2 text-5xl font-bold text-zinc-50">일한시간</h1>
+					aria-label="시계와 화살표가 결합된 아이콘"
+				/>
+				<h1 className="mr-2 mt-2 text-5xl font-bold">일한시간</h1>
 			</a>
 			{uploaded ? (
 				<>
@@ -90,14 +88,23 @@ export function Info({
 						<div className="flex flex-col items-center gap-2">
 							<label
 								htmlFor="file"
-								className="cursor-pointer rounded-xl border-2 border-zinc-50 bg-zinc-50 py-3 px-5 text-center text-lg font-semibold text-zinc-800"
+								className="flex cursor-pointer items-center gap-2 rounded-xl border-2 border-zinc-50 bg-zinc-50 px-5 py-3 text-center text-lg font-semibold text-zinc-800"
 							>
-								*.ics 파일 선택
+								<Upload />
+								<span>*.ics 파일 선택</span>
 							</label>
 							<Note text="또는 끌어다 놓기" />
 						</div>
-						<button className="h-fit cursor-not-allowed rounded-xl border-2 border-zinc-50 py-3 px-5 text-lg text-zinc-50 opacity-50 ">
-							파일 받는 법
+						<button
+							onClick={setExampleIcalData}
+							className="flex h-fit items-center gap-2 rounded-xl border-2 border-zinc-50 px-5 py-3 text-lg text-zinc-50"
+						>
+							<GanttChartSquare />
+							<span>예시 확인</span>
+						</button>
+						<button className=" flex h-fit cursor-not-allowed items-center gap-2 rounded-xl border-2 border-zinc-50 px-5 py-3 text-lg text-zinc-50 opacity-50 ">
+							<Download />
+							<span>파일 받는 법</span>
 						</button>
 					</div>
 				</>

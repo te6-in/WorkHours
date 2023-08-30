@@ -1,6 +1,7 @@
 import { Result } from "@/scripts/counts-by-durations";
 import { getReceipt } from "@/scripts/receipt";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
+import { CheckCircle } from "lucide-react";
 import { forwardRef } from "react";
 
 interface ReceiptProps {
@@ -21,19 +22,7 @@ export const Receipt = forwardRef<HTMLDivElement, ReceiptProps>(
 					{receipt.length > 0 ? (
 						<>
 							<div className="-mt-2 flex items-end justify-between">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="mr-4 h-10 min-h-[2.5rem] w-10 min-w-[2.5rem] fill-none stroke-current text-zinc-500"
-								>
-									<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-									<polyline points="22 4 12 14.01 9 11.01"></polyline>
-								</svg>
+								<CheckCircle width={40} height={40} className="text-zinc-500" />
 								<div>
 									<h3 className="text-right text-5xl font-black leading-snug">
 										총 {getHumanStringFromMilliseconds(totalSelectedDuration)}

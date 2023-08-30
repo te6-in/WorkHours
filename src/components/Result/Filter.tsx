@@ -3,6 +3,7 @@ import {
 	getFirstAndLastEventDate,
 	getPickerStringFromDate,
 } from "@/scripts/calendar";
+import { CalendarSearch } from "lucide-react";
 import {
 	Dispatch,
 	MouseEventHandler,
@@ -188,23 +189,7 @@ export function Filter({ icalData, duration, setDuration }: FilterProps) {
 		<div className="flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-zinc-100 p-4 shadow-lg">
 			<div>
 				<div className="flex items-center justify-center gap-1 text-lg font-bold text-zinc-900">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						className="mr-0.5 h-5 min-h-[1.25rem] w-5 min-w-[1.25rem] fill-none stroke-current"
-					>
-						<path d="M21 12V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h7.5"></path>
-						<path d="M16 2v4"></path>
-						<path d="M8 2v4"></path>
-						<path d="M3 10h18"></path>
-						<path d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6v0Z"></path>
-						<path d="m22 22-1.5-1.5"></path>
-					</svg>
+					<CalendarSearch width={20} height={20} />
 					<h2>필터</h2>
 				</div>
 				<p className="mt-1 text-center text-sm text-zinc-600">
