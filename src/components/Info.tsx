@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button";
 import { Note } from "@/components/Note";
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
@@ -85,27 +86,26 @@ export function Info({
 						className="hidden"
 					/>
 					<div className="mt-10 flex select-none flex-wrap justify-center gap-4">
-						<div className="flex flex-col items-center gap-2">
-							<label
-								htmlFor="file"
-								className="flex cursor-pointer items-center gap-2 rounded-xl border-2 border-zinc-50 bg-zinc-50 px-5 py-3 text-center text-lg font-semibold text-zinc-800"
-							>
-								<Upload />
-								<span>*.ics 파일 선택</span>
-							</label>
-							<Note text="또는 끌어다 놓기" />
-						</div>
-						<button
+						<Button
+							isPrimary
+							isLabelForFile
+							Icon={Upload}
+							text="*.ics 파일 선택"
+							note="또는 끌어다 놓기"
+							eventName="upload-file"
+						/>
+						<Button
+							Icon={GanttChartSquare}
+							text="예시 확인"
 							onClick={setExampleIcalData}
-							className="flex h-fit items-center gap-2 rounded-xl border-2 border-zinc-50 px-5 py-3 text-lg text-zinc-50"
-						>
-							<GanttChartSquare />
-							<span>예시 확인</span>
-						</button>
-						<button className=" flex h-fit cursor-not-allowed items-center gap-2 rounded-xl border-2 border-zinc-50 px-5 py-3 text-lg text-zinc-50 opacity-50 ">
-							<Download />
-							<span>파일 받는 법</span>
-						</button>
+							eventName="see-example"
+						/>
+						<Button
+							isDisabled
+							Icon={Download}
+							text="파일 받는 법"
+							eventName="how-to-get-ics"
+						/>
 					</div>
 				</>
 			)}

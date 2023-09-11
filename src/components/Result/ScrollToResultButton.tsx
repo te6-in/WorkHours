@@ -1,4 +1,5 @@
 import { scrollToElement } from "@/scripts/scroll";
+import { getEventName } from "@/scripts/umami";
 import {
 	AnimatePresence,
 	motion,
@@ -41,6 +42,7 @@ export function ScrollToResultButton({
 					animate={{ x: "-50%", y: 0 }}
 					exit={{ x: "-50%", y: 80 }}
 					onClick={onClick}
+					data-umami-event={getEventName("scroll-to-result")}
 					className="fixed bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-zinc-700 p-4 text-zinc-50 shadow-md"
 				>
 					<ChevronDownCircle />

@@ -1,6 +1,7 @@
 import { DurationChip } from "@/components/Result/DurationChip";
 import { Result } from "@/scripts/counts-by-durations";
 import { getHumanStringFromMilliseconds } from "@/scripts/time-conversions";
+import { getEventDataProps, getEventName } from "@/scripts/umami";
 import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 interface EventsCardProps {
@@ -12,13 +13,18 @@ export interface ButtonProps {
 	text: string;
 	disabled: boolean;
 	onClick: MouseEventHandler<HTMLButtonElement>;
+	eventType: "select-all" | "select-none";
 }
 
-function Button({ text, disabled, onClick }: ButtonProps) {
+function Button({ text, disabled, onClick, eventType }: ButtonProps) {
 	return (
 		<button
 			onClick={onClick}
 			disabled={disabled}
+			data-umami-event={getEventName("event-all-occurrence")}
+			{...getEventDataProps({
+				type: eventType,
+			})}
 			className={`mt-3 rounded-lg bg-zinc-500 px-3 py-2 text-sm font-medium text-zinc-100 transition-opacity ${
 				disabled && "cursor-not-allowed opacity-50"
 			}`}
@@ -155,11 +161,13 @@ export function EventsCard({ result, setResults }: EventsCardProps) {
 						text="모두 선택"
 						onClick={onSelectAllClick}
 						disabled={allChecked}
+						eventType="select-all"
 					/>
 					<Button
 						text="모두 선택 해제"
 						onClick={onSelectNoneClick}
 						disabled={noneChecked}
+						eventType="select-none"
 					/>
 				</div>
 			)}

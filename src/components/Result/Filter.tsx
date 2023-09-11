@@ -3,6 +3,8 @@ import {
 	getFirstAndLastEventDate,
 	getPickerStringFromDate,
 } from "@/scripts/calendar";
+import { j } from "@/scripts/join-classes";
+import { getEventDataProps, getEventName } from "@/scripts/umami";
 import { CalendarSearch } from "lucide-react";
 import {
 	Dispatch,
@@ -25,13 +27,13 @@ interface FilterProps {
 
 interface ButtonProps {
 	text: string;
-	on?: boolean;
+	isOn?: boolean;
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 interface PresetDuration {
 	text: string;
-	on: boolean;
+	on?: boolean;
 	duration: DateRangeType;
 }
 
@@ -41,13 +43,16 @@ interface PresetButtonProps {
 	setIsCustomDuration: Dispatch<SetStateAction<boolean>>;
 }
 
-function Button({ text, on = false, onClick }: ButtonProps) {
+function Button({ text, isOn, onClick }: ButtonProps) {
 	return (
 		<button
 			onClick={onClick}
-			className={`rounded-xl px-3 py-2 text-sm transition-colors  ${
-				on ? "bg-zinc-800 text-zinc-100" : "bg-zinc-300 text-zinc-900"
-			}`}
+			className={j(
+				"rounded-xl px-3 py-2 text-sm transition-colors",
+				isOn ? "bg-zinc-800 text-zinc-100" : "bg-zinc-300 text-zinc-900"
+			)}
+			data-umami-event={getEventName("filter-preset")}
+			{...getEventDataProps({ duration: text })}
 		>
 			{text}
 		</button>
@@ -77,7 +82,7 @@ function PresetButton({
 	return (
 		<Button
 			text={presetDuration.text}
-			on={presetDuration.on}
+			isOn={presetDuration.on}
 			onClick={onClick}
 		/>
 	);
@@ -207,7 +212,7 @@ export function Filter({ icalData, duration, setDuration }: FilterProps) {
 				))}
 				<Button
 					text="직접 선택"
-					on={isCustomDuration}
+					isOn={isCustomDuration}
 					onClick={handleCustomDurationClick}
 				/>
 			</div>

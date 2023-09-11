@@ -12,6 +12,7 @@ import {
 import { Result, getResults } from "@/scripts/counts-by-durations";
 import { readFile } from "@/scripts/read-file";
 import { scrollToTop } from "@/scripts/scroll";
+import { getEventDataProps, getEventName } from "@/scripts/umami";
 import {
 	ChangeEvent,
 	Dispatch,
@@ -32,7 +33,7 @@ interface ResultProps {
 	setData: (data: string) => void;
 }
 
-function Button({ text, disabled, onClick }: ButtonProps) {
+function Button({ text, disabled, onClick, eventType }: ButtonProps) {
 	return (
 		<button
 			onClick={onClick}
@@ -40,6 +41,10 @@ function Button({ text, disabled, onClick }: ButtonProps) {
 			className={`rounded-xl bg-zinc-600 px-3 py-2 text-zinc-100 transition-opacity ${
 				disabled && "cursor-not-allowed opacity-50"
 			}`}
+			data-umami-event={getEventName("calendar-all-occurrence")}
+			{...getEventDataProps({
+				type: eventType,
+			})}
 		>
 			{text}
 		</button>
@@ -194,11 +199,13 @@ export function ResultCards({
 										disabled={allChecked}
 										onClick={onSelectAllClick}
 										text="모두 선택"
+										eventType="select-all"
 									/>
 									<Button
 										disabled={noneChecked}
 										onClick={onSelectNoneClick}
 										text="모두 선택 해제"
+										eventType="select-none"
 									/>
 								</div>
 							</div>
@@ -247,6 +254,7 @@ export function ResultCards({
 			/>
 			<div className="mt-6 flex select-none flex-col gap-1">
 				<label
+					data-umami-event={getEventName("another-file")}
 					htmlFor="new-file"
 					className="text-md cursor-pointer text-center font-medium text-zinc-300 underline underline-offset-2"
 				>
