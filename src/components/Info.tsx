@@ -48,7 +48,7 @@ export function Info({
 	return (
 		<>
 			<a
-				href="/work-hours/"
+				href="/"
 				className="m-auto flex w-fit select-none items-center justify-center gap-2 text-zinc-50"
 			>
 				<TimerReset
