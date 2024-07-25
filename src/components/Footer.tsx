@@ -1,5 +1,5 @@
 import { getEventDataProps, getEventName } from "@/scripts/umami";
-import { Github } from "lucide-react";
+import { Gitlab } from "lucide-react";
 import { ReactNode } from "react";
 
 const data = [
@@ -76,20 +76,20 @@ export function Footer() {
 					/>
 					te6.in 개발·디자인 블로그
 				</Button>
-				<Button href="https://github.com/te6-in/work-hours" eventName="github">
-					<Github width={20} height={20} />
-					GitHub 레포지토리
+				<Button href="https://gitlab.com/te6.in/work-hours" eventName="gitlab">
+					<Gitlab width={20} height={20} />
+					GitLab 레포지토리
 				</Button>
 			</div>
 			<a
-				href="https://github.com/te6-in/work-hours/"
+				href="https://gitlab.com/te6.in/work-hours/"
 				target="_blank"
 				rel="noopener noreferrer"
-				data-umami-event={getEventName("github-stars")}
+				data-umami-event={getEventName("gitlab-stars")}
 			>
 				<img
-					alt="GitHub 레포지토리 Stars 수"
-					src="https://img.shields.io/github/stars/te6-in/work-hours?style=social"
+					alt="GitLab 레포지토리 Stars 수"
+					src="https://img.shields.io/gitlab/stars/te6.in/work-hours"
 				/>
 			</a>
 			<span className="text-center text-sm leading-6 text-zinc-500">
