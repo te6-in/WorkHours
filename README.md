@@ -5,7 +5,10 @@
 <img src="https://user-images.githubusercontent.com/56245920/232277350-458a5e8c-9272-4ccd-b55a-cf76abe4e793.png" alt="A screenshot of work-hours page with an ics file uploaded" width="75%" />
 
 ## Try it out
-- ✨ This website is live [here](https://te6.in/work-hours)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/431368e9-32d5-4485-a526-a86b3040b706/deploy-status)](https://app.netlify.com/sites/tubular-seahorse-342cfe/deploys)
+
+✨ This website is live on [work-hours.te6.in](https://work-hours.te6.in)
 
 ## Getting Started
 ```shell
