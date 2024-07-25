@@ -2,7 +2,7 @@
 	"name": "work-hours",
 	"private": true,
 	"version": "0.0.0",
-	"homepage": "https://te6.in/work-hours",
+	"homepage": "https://work-hours.te6.in",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",

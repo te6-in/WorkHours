@@ -12,7 +12,7 @@
 
 ## Getting Started
 ```shell
-git clone https://github.com/te6-in/work-hours.git
+git clone https://gitlab.com/te6.in/work-hours.git
 cd work-hours
 npm install
 ```

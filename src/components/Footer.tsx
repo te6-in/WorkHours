@@ -95,7 +95,7 @@ export function Footer() {
 			<span className="text-center text-sm leading-6 text-zinc-500">
 				라이선스:{" "}
 				<License
-					href="https://github.com/te6-in/work-hours/blob/main/LICENSE"
+					href="https://gitlab.com/te6.in/work-hours/-/blob/main/LICENSE"
 					text="MPL-2.0"
 				/>
 				<br />
